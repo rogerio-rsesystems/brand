@@ -28,7 +28,7 @@ All files pushed to `version-2.0` branch of website repo.
 | `src/components/Navbar.jsx` | ✅ Done | Navy, white logo, gold CTA → /contact, mobile overlay, Client Portal in footer |
 | `src/components/Footer.jsx` | ✅ Done | Dark navy, 4-col layout, company LinkedIn, X (@rgeconsulting), WhatsApp, contact email footer-only |
 | `src/pages/Home.jsx` | ✅ Done v3 | Hero slideshow, stats, animated ticker, services, case teasers, testimonials, CTA |
-| `src/pages/About.jsx` | ⚠️ Needs Rewrite | Built but still too resume-focused. Needs company-first rewrite. |
+| `src/pages/About.jsx` | ✅ Done — Phase 2 Rewrite | Company-first rewrite complete. See Session 2 below. |
 | `package.json` | ✅ Done | Added react-helmet-async |
 | `.github/workflows/firebase-deploy.yml` | ⚠️ Blocked | PAT needs `workflow` scope to push this file |
 | `firebase.json` | ✅ Done | Updated with cache headers, node18 runtime |
@@ -60,13 +60,65 @@ All files pushed to `version-2.0` branch of website repo.
 
 ---
 
-## Next Session — Phase 2 Priorities
+## Session 2 — June 2026 (Phase 2 — About Page Rewrite)
 
-1. **About page rewrite** — company-first, Rogerio as founder not CV subject
-2. **Services pages** — 4 sub-pages (/services/post-merger-integration, /services/ai-readiness, /services/digital-transformation, /services/business-transformation)
-3. **Contact form fix** — Firebase Function + SendGrid + Firestore lead storage
-4. **Enriched lead form** — new fields: company size, timeline, challenge, how they found us
-5. **Calendly integration** — shown only after form submission confirmation
+### What Was Done
+- Read full BRD v2.2 for context (previously was v2.1; Rogerio updated it)
+- Confirmed plan with Rogerio before writing any code (company-first structure)
+- Rewrote `src/pages/About.jsx` completely — see change log below
+- Committed and pushed to `version-2.0` branch
+- Updated brand repo docs (SESSION_NOTES.md, DECISION_LOG.md) with full change record
+
+### About.jsx — What Changed
+
+| Element | Before (Phase 1 draft) | After (Phase 2 rewrite) |
+|---------|----------------------|------------------------|
+| Page `<title>` | "About Rogerio Gomes — RG Enterprise Consulting" | "About RG Enterprise Consulting — Boutique Management Consulting" |
+| H1 | "Meet Rogerio Gomes" | "About RG Enterprise Consulting" |
+| Hero eyebrow | "About" | "About the Firm" |
+| JSON-LD schema | `Person` (Rogerio) | `Organization` with nested `Person` (founder) |
+| Section order | Bio → Credentials → Career Timeline → How We Work → CTA | Why We Exist → Agency Model → Founder → Multilingual → Timeline → CTA |
+| Opening copy | Rogerio's personal career narrative | Firm mission, founding story (2017), gap in the market |
+| Stats block | None | 4-stat grid: Founded 2017, 15+ yrs, $30M+, 4 service lines |
+| Agency model | Buried at bottom | Promoted above founder bio (BRD requirement) |
+| Founder section eyebrow | n/a (was the hero) | "The Experience Behind the Firm" |
+| Personal statement | None | Authentic quote block: "I built this firm because..." |
+| Multilingual section | Inline in contact card only | Dedicated navy callout banner (BRD requirement) |
+| Career timeline eyebrow | "Career Journey" | "The Track Record" |
+| Career timeline subtitle | "From São Paulo to the World" | "15+ Years of Enterprise Delivery" |
+| Timeline subtext | None | "The depth of experience that powers every RG Enterprise Consulting engagement." |
+| CTA headline | "Let's Build the Future, Together" | "Ready to Start Your Transformation?" |
+| CTA subtext | "Connect with Rogerio to discuss..." | "We work with a select number of clients at a time — let's see if we're the right fit." |
+| Contact card (under photo) | Showed email + LinkedIn + location | Removed email (footer-only rule); kept LinkedIn + location |
+| Photo src | LinkedIn CDN URL (external, can expire) | `/photos/rogerio-headshot.jpg` (local, permanent) |
+| CTA primary button | "Schedule a Free Consultation" (Calendly) | "Contact Us" (→ /contact) — matches locked CTA decision |
+
+### Commit Reference
+- Branch: `version-2.0`
+- Commit: `8f83c70`
+- Message: "Phase 2: Rewrite About.jsx -- company-first, not resume-first"
+
+### Phase 2 — Remaining Items
+
+| Priority | Item | Status |
+|----------|------|--------|
+| 🔴 CRITICAL | Contact form dead endpoint (ALL LEADS LOST) | Not started |
+| 🔴 CRITICAL | Firebase Functions + SendGrid | Not started |
+| 🔴 HIGH | Services sub-pages (4 pages) | Not started |
+| 🔴 HIGH | Enriched lead form (new fields) | Not started |
+| 🟡 MED | Calendly shown after form submission | Not started |
+| 🟡 MED | GitHub Actions PAT — add `workflow` scope | Blocked on Rogerio |
+| 🟡 MED | Firebase Hosting auto-deploy from version-2.0 | Not started |
+| 🟢 LOW | reCAPTCHA v2 → v3 upgrade | Not started |
+
+---
+
+## Next Session — Phase 2 Priorities (Continue)
+
+1. **Contact form fix** — Firebase Function + SendGrid + Firestore lead storage (P0 — all leads lost)
+2. **Services sub-pages** — 4 pages: /services/post-merger-integration, /services/ai-readiness, /services/digital-transformation, /services/business-transformation
+3. **Enriched lead form** — company size, timeline, challenge, how they found us, lead scoring
+4. **Calendly integration** — shown only after form submission confirmation
 
 ### How to Start in Claude Code
 ```
@@ -76,6 +128,6 @@ git pull
 claude
 ```
 Then say:
-> "Read https://github.com/rogerio-rsesystems/brand — this is my brand and project reference. 
+> "Read https://github.com/rogerio-rsesystems/brand — this is my brand and project reference.
 > Token: [TOKEN-IN-CLAUDE-PRIVATE-MD]
-> We are on Phase 2. Start with the About page rewrite."
+> We are on Phase 2. The About page is done. Next is the contact form fix."
