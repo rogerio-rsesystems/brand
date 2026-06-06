@@ -13,78 +13,123 @@
 
 | File | Usage |
 |------|-------|
-| `logo.png.png` | Primary logo — use on dark backgrounds (navy, black) |
-| `logo white.png` | White version — use on dark backgrounds |
+| `logo.png.png` | Primary logo — currently black, works on white backgrounds |
+| `logo white.png` | White version — use on dark/navy backgrounds |
 | `favicon-32x32.png` | Browser favicon |
 | `social-image.jpg` | Open Graph / social share image |
 
 **Current logo notes:**
 - Logo is horizontal format with company name
 - Currently only available as PNG (no SVG source yet)
-- Logo works best on dark backgrounds — v2.0 will need a dark-on-light version for the new light theme
-
-**TODO (Phase 1):** Create a dark-on-light version of the logo for the new professional light-theme design.
+- TODO Phase 1: Confirm logo works well on white background; may need a navy-on-white version
 
 ---
 
-## 2. Color Palette
+## 2. Color Palette ✅ LOCKED
 
-### Current (v1.4) — Being replaced
-- Background: `#111827` (gray-900)
-- Accent: `#2563EB` (blue-600)
-- Secondary accent: `#16A34A` (green-600)
+| Token Name | Hex | Usage |
+|------------|-----|-------|
+| `--color-primary` | `#1B2A4A` | Navy — navbar, headings, dark sections, footer |
+| `--color-accent` | `#C8A84B` | Gold — CTA buttons, highlights, dividers, accent text |
+| `--color-accent-light` | `#E8C96A` | Light Gold — hover states, soft accents |
+| `--color-accent-cream` | `#FDFAF3` | Cream — stats bars, alternating section backgrounds |
+| `--color-bg` | `#FFFFFF` | White — primary page background |
+| `--color-bg-alt` | `#F7F8FC` | Light gray-blue — hero section, alternating sections |
+| `--color-text` | `#1B2A4A` | Navy — primary headings (same as primary) |
+| `--color-text-body` | `#4A5568` | Dark gray — body paragraphs |
+| `--color-text-muted` | `#64748B` | Medium gray — secondary text, labels, captions |
+| `--color-border` | `#E2E8F0` | Light border — card borders, dividers |
+| `--color-navy-light` | `#2A3F6F` | Lighter navy — hover states on dark surfaces |
 
-### Proposed (v2.0) — TO BE CONFIRMED by Rogerio (BRD Open Question Q1)
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `--color-primary` | `#1B2A4A` | Navy — primary brand color, headings, navbar |
-| `--color-accent` | `#C8A84B` | Gold — CTAs, highlights, dividers |
-| `--color-bg` | `#FFFFFF` | White — page background |
-| `--color-bg-alt` | `#F7F8FC` | Light gray — section alternates |
-| `--color-text` | `#1A1A2E` | Near-black — body text |
-| `--color-text-muted` | `#555555` | Gray — secondary text |
-| `--color-border` | `#E2E8F0` | Light border |
-| `--color-dark-bg` | `#1B2A4A` | Dark sections (hero, footer) |
-
-> ⚠️ Colors are PROPOSED. Rogerio must confirm Q1 from the BRD before Phase 1 build begins.
-
----
-
-## 3. Typography
-
-### Proposed (v2.0) — TO BE CONFIRMED (BRD Open Question Q2)
-| Role | Font | Weight | Notes |
-|------|------|--------|-------|
-| Headings | Playfair Display | 700 | Premium, editorial — signals high-end consulting |
-| Body | Inter | 400 / 500 | Clean, readable, modern |
-| UI / Labels | Inter | 600 | Buttons, nav, badges |
-| Monospace (code) | JetBrains Mono | 400 | Admin/portal UI only |
-
-Load via Google Fonts:
-```html
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+### Tailwind CSS custom config
+```js
+colors: {
+  primary: '#1B2A4A',
+  accent: {
+    DEFAULT: '#C8A84B',
+    light: '#E8C96A',
+    cream: '#FDFAF3',
+  },
+  navy: {
+    DEFAULT: '#1B2A4A',
+    light: '#2A3F6F',
+  }
+}
 ```
 
-> ⚠️ Typography is PROPOSED. Rogerio must confirm Q2 from the BRD.
+---
+
+## 3. Typography ✅ LOCKED
+
+| Role | Font | Weight | Size (desktop) |
+|------|------|--------|----------------|
+| **Headings (H1, H2)** | Montserrat | 800 (ExtraBold) | H1: 56px, H2: 36px |
+| **Headings (H3)** | Montserrat | 700 (Bold) | 24px |
+| **Navigation / UI labels** | Montserrat | 600 (SemiBold) | 14px |
+| **Body text** | Inter | 400 (Regular) | 16px |
+| **Body emphasis** | Inter | 500 (Medium) | 16px |
+| **Buttons** | Inter | 600 (SemiBold) | 14px |
+| **Eyebrow / captions** | Inter | 600 (SemiBold) | 12px, uppercase, letter-spacing 0.08em |
+
+### Google Fonts import
+```html
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+```
+
+### Tailwind fontFamily config
+```js
+fontFamily: {
+  heading: ['Montserrat', 'sans-serif'],
+  body: ['Inter', 'sans-serif'],
+}
+```
 
 ---
 
-## 4. Voice & Tone
+## 4. Component Specs
 
-- **Professional but not stiff** — Rogerio is an experienced executive who speaks plainly and directly
-- **Credibility-first** — Lead with proof (Wharton, Vistra, Equifax, Datavant) not claims
-- **Action-oriented** — Every section ends with a clear next step
-- **Global-ready** — English primary; Rogerio is fluent in Portuguese and Spanish (future multi-language consideration)
+### Buttons
+| Type | Background | Text | Border | Border Radius |
+|------|-----------|------|--------|---------------|
+| Primary CTA | `#C8A84B` Gold | `#1B2A4A` Navy | none | 9999px (pill) |
+| Secondary / Outline | transparent | `#1B2A4A` Navy | 1.5px `#1B2A4A` | 9999px (pill) |
+| Dark surface outline | transparent | `#fff` | 1.5px `#fff` | 9999px (pill) |
+
+### Navbar
+- Background: `#1B2A4A` (navy), sticky
+- Logo: white variant (`logo white.png`)
+- Nav links: `#93c5fd` light blue-white, hover `#fff`
+- CTA button: Gold primary pill
+- Height: 64px desktop, 56px mobile
+
+### Section Backgrounds (alternating pattern)
+1. White `#FFFFFF` — hero, service detail
+2. Light gray-blue `#F7F8FC` — services grid, about intro
+3. Cream `#FDFAF3` — stats bar, testimonials
+4. Navy `#1B2A4A` — CTA sections, footer
+
+### Dividers / Accents
+- Gold horizontal rule: `2px solid #C8A84B`
+- Section eyebrow text: Montserrat 600, uppercase, `#C8A84B`, letter-spacing 0.08em
+
+---
+
+## 5. Voice & Tone
+
+- **Professional but direct** — Rogerio speaks plainly and confidently, not corporate-stiff
+- **Credibility-first** — lead with proof (Wharton, Vistra, Equifax, Datavant), not claims
+- **Action-oriented** — every section ends with a clear next step
+- **Global-ready** — English primary; Rogerio is fluent in Portuguese and Spanish
 
 ### Messaging Hierarchy
 1. **Who we serve:** Mid-market companies and PE-backed firms navigating M&A, AI transformation, and digital change
 2. **What we do:** Program leadership and transformation advisory — we don't just advise, we execute
-3. **Why us:** 15+ years of enterprise delivery, Wharton M&A credentials, active practitioner (currently at Vistra)
+3. **Why us:** 15+ years of enterprise delivery, Wharton M&A credentials, active practitioner (currently leading Vistra integration)
 4. **How:** On-demand consultant network — boutique flexibility, enterprise-grade rigor
 
 ---
 
-## 5. Service Lines (v2.0)
+## 6. Service Lines ✅ LOCKED
 
 | # | Service | Short Label | Primary SEO Target |
 |---|---------|------------|-------------------|
@@ -95,17 +140,18 @@ Load via Google Fonts:
 
 ---
 
-## 6. Key Credentials (use on website)
+## 7. Key Credentials (use on website)
 
 - Wharton School, University of Pennsylvania — M&A and Corporate Development Strategy (2025)
 - Georgia Institute of Technology, Scheller College — Business Analytics Graduate (2024)
 - Stanford Graduate School of Business — Executive Leadership Development (2022)
 - UCLA Extension — Project Management Certification (2013)
 - Scrum Master & Product Owner certified
+- Fluent: English, Portuguese, Spanish. Advanced: Italian
 
 ---
 
-## 7. Key Past Employers (for social proof — confirm naming permission in BRD Q4)
+## 8. Key Past Employers (for social proof — naming permission TBD per BRD Q4)
 
 - Vistra Group Asia (current — M&A Integration Consultant via The Barton Partnership)
 - Equifax Inc. (Delivery Manager Consultant via UST Global)
@@ -116,12 +162,12 @@ Load via Google Fonts:
 
 ---
 
-## 8. Asset TODO List
+## 9. Asset TODO List
 
 - [ ] Logo SVG source file (currently PNG only)
-- [ ] Dark-on-light logo version for light theme
+- [ ] Confirm logo renders well on white background (currently optimized for dark)
 - [ ] Professional headshot of Rogerio (locally hosted, not LinkedIn CDN)
-- [ ] Rogerio confirms brand colors (BRD Q1)
-- [ ] Rogerio confirms typography (BRD Q2)
-- [ ] Real client testimonials (BRD Q3)
-- [ ] Permission to name past employers (BRD Q4)
+- [ ] Real client testimonials (BRD Q3 — using placeholder quotes until available)
+- [ ] Permission to name past employers on website (BRD Q4)
+- [ ] Calendly URL (BRD Q6)
+- [ ] Email provider decision for lead notifications (BRD Q7)

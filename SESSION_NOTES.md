@@ -12,30 +12,38 @@
 - Service portfolio redefined into 4 service lines (PMI, AI Readiness, Digital Transformation, Business Transformation)
 - BRD v2.0 created as a Word document (9 sections, 535 paragraphs)
 - Brand repo created at https://github.com/rogerio-rsesystems/brand
-- Brand guide (BRAND_GUIDE.md), session startup README, Decision Log, and Session Notes committed to brand repo
+- GitHub PAT configured — Claude can now push to brand repo autonomously each session
+- Brand guide, session startup README, Decision Log, and Session Notes committed
 - Logo assets copied from v1.4 codebase into brand repo
 
+### Design decisions locked this session
+- ✅ Colors: Navy `#1B2A4A` + Gold `#C8A84B` on white background
+- ✅ Headings font: Montserrat 800 (ExtraBold)
+- ✅ Body font: Inter 400/500/600
+- ✅ Testimonials: Write realistic placeholders until real quotes obtained
+- ❌ Rejected: Dark-only theme, Navy+Teal, Navy+Blue, Playfair Display ("too 80s")
+
 ### Key findings from code audit
-- **CRITICAL:** Contact form POSTs to `/api/sendContactEmail` — a placeholder never wired to Firebase Functions. All leads are silently lost.
-- **CRITICAL:** Zero SEO — no meta tags, no sitemap, no robots.txt on any page
-- **CRITICAL:** Fake testimonial ("Jane Doe, CEO of Tech Innovators Inc.") still on homepage
-- **HIGH:** Dark-mode-only design — not appropriate for a premium consulting brand
+- **CRITICAL:** Contact form POSTs to `/api/sendContactEmail` — never wired. All leads silently lost.
+- **CRITICAL:** Zero SEO on any page
+- **CRITICAL:** Fake testimonial ("Jane Doe") on homepage — damages credibility
 - **HIGH:** Admin access hardcoded to single email — no role system
-- **HIGH:** Firebase credentials likely committed to Git (in src/firebase-config.js)
-- **MEDIUM:** Footer links to `/client-login` which doesn't exist (correct path: `/login`)
+- **HIGH:** Firebase credentials likely committed to Git
 
 ### What comes next (Session 2)
-- Rogerio answers the 10 open questions from BRD Section 8
-- Once Q1 (colors) and Q2 (fonts) are answered → Phase 1 build begins
-- Phase 1 first deliverable: Design token system + Homepage redesign
+- Answer remaining open questions Q4–Q10 (quick — 5 minutes)
+- Then immediately start Phase 1 build:
+  - Design token system (theme.js + tailwind.config.js)
+  - Homepage v2
+  - Navbar v2
+  - Footer v2
+  - About page v2
 
-### Files committed to brand repo this session
-- README.md (Claude session startup guide)
-- BRAND_GUIDE.md
-- DECISION_LOG.md
-- SESSION_NOTES.md (this file)
+### Files in brand repo after this session
+- README.md — Claude session startup guide (with token instructions)
+- BRAND_GUIDE.md — full brand spec with locked colors and fonts
+- DECISION_LOG.md — Q1, Q2, Q3 locked
+- SESSION_NOTES.md — this file
 - RG_Enterprise_Consulting_BRD_v2.0.docx
-- logo.png.png
-- logo white.png
-- favicon-32x32.png
-- social-image.jpg
+- logo.png.png, logo white.png, favicon-32x32.png, social-image.jpg
+- .gitignore
