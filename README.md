@@ -57,7 +57,7 @@ You are the primary developer for the RG Enterprise Consulting website. At the s
 | Phase | Name | Status | Notes |
 |-------|------|--------|-------|
 | Phase 1 | Brand & Design System | 🟢 Complete | Pushed to version-2.0 |
-| Phase 2 | Services & Lead Generation | 🔴 Not Started | **Next priority** |
+| Phase 2 | Services & Lead Generation | 🟡 In Progress | Active in Claude Code — About rewrite, services pages, contact form fix |
 | Phase 3 | Case Studies & Portfolio | 🔴 Not Started | |
 | Phase 4 | Insights Platform & SEO | 🔴 Not Started | |
 | Phase 5 | Client Portal v2 | 🔴 Not Started | |

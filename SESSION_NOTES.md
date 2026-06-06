@@ -131,3 +131,28 @@ Then say:
 > "Read https://github.com/rogerio-rsesystems/brand — this is my brand and project reference.
 > Token: [TOKEN-IN-CLAUDE-PRIVATE-MD]
 > We are on Phase 2. The About page is done. Next is the contact form fix."
+---
+
+## Session 1 — Continued (Phase 2 Started)
+
+### Email decision change
+- **SendGrid dropped** — sold to Twilio, free tier concerns
+- **Ionos SMTP + Nodemailer confirmed** — Rogerio hosts DNS and email on Ionos
+- SMTP: smtp.ionos.com, port 587
+- From: leads@rgenterpriseconsulting.com → To: rogerio@rgenterpriseconsulting.com
+- Credentials to be stored as Firebase environment secrets — never in code
+- Firestore backup on every form submission confirmed (recommended approach accepted)
+
+### Phase 2 now active in Claude Code
+Claude Code started on Rogerio's Windows machine. Phase 2 priorities:
+1. About page rewrite — company-first, not resume-first
+2. 4 service sub-pages
+3. Contact form fix — Firebase Function + Ionos SMTP + Nodemailer
+4. Enriched lead form (new fields)
+5. Calendly shown post-form only (on confirmation page)
+
+### Important notes for Claude Code session
+- Do NOT use SendGrid — use Ionos SMTP via Nodemailer
+- Ionos SMTP credentials to be provided by Rogerio and stored as Firebase secrets
+- leads@rgenterpriseconsulting.com must exist as a mailbox in Ionos before deploying
+- All work on version-2.0 branch only
