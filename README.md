@@ -23,10 +23,12 @@ You are the primary developer and strategic advisor for the RG Enterprise Consul
    - `DECISION_LOG.md` — all locked decisions from previous sessions
    - `SESSION_NOTES.md` — notes from last session
 
-3. **Website codebase repo (may be private — request ZIP if needed):**
+3. **Clone website codebase repo (same token works):**
+   ```bash
+   git clone https://[TOKEN]@github.com/rogerio-rsesystems/rgenterpriseconsulting.git
+   cd rgenterpriseconsulting && git checkout version-2.0
    ```
-   https://github.com/rogerio-rsesystems/rgenterpriseconsulting.git
-   ```
+   Always work on the **version-2.0** branch. Never commit to version-1.4 or main.
 
 4. **Confirm to Rogerio what phase and task you are picking up.**
 
@@ -59,7 +61,7 @@ You are the primary developer and strategic advisor for the RG Enterprise Consul
 
 | Phase | Name | Status | Notes |
 |-------|------|--------|-------|
-| Phase 1 | Brand & Design System | 🟡 In Progress | All decisions locked. Build starts Session 2. |
+| Phase 1 | Brand & Design System | 🟢 Complete | Pushed to version-2.0 branch on website repo |
 | Phase 2 | Services & Lead Generation | 🔴 Not Started | Blocked on Phase 1 |
 | Phase 3 | Case Studies & Portfolio | 🔴 Not Started | Blocked on Q4 (client naming) |
 | Phase 4 | Insights Platform & SEO | 🔴 Not Started | — |
