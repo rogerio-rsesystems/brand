@@ -9,30 +9,39 @@ This file tells Claude exactly what to read and load at the start of every new c
 
 You are the primary developer and strategic advisor for the RG Enterprise Consulting website overhaul project. At the start of every session, you must:
 
-1. **Clone this brand repo** to read current assets and brand guide:
+1. **Clone this brand repo. The GitHub token is stored in CLAUDE_PRIVATE.md (never commit that file):**
+   ```bash
+   git clone https://[TOKEN]@github.com/rogerio-rsesystems/brand.git
+   git config user.email "rogerio@rgenterpriseconsulting.com"
+   git config user.name "Claude (RG Consulting)"
    ```
-   https://github.com/rogerio-rsesystems/brand.git
-   ```
+   Read CLAUDE_PRIVATE.md (it is gitignored) to get the token. If it doesn't exist, ask Rogerio for the GitHub PAT.
 
 2. **Read these files in order:**
    - `BRAND_GUIDE.md` — colors, fonts, logo assets, voice, service lines, credentials
-   - `RG_Enterprise_Consulting_BRD_v2.0.docx` — full project requirements (extract text)
-   - `DECISION_LOG.md` — all locked decisions from previous sessions (if file exists)
-   - `SESSION_NOTES.md` — notes from last session (if file exists)
+   - `RG_Enterprise_Consulting_BRD_v2.0.docx` — full project requirements
+   - `DECISION_LOG.md` — all locked decisions from previous sessions
+   - `SESSION_NOTES.md` — notes from last session
 
-3. **Check the website codebase repo:**
+3. **Website codebase repo (may be private — request ZIP if needed):**
    ```
    https://github.com/rogerio-rsesystems/rgenterpriseconsulting.git
    ```
-   (This may be private — user will provide ZIP if needed)
 
-4. **Confirm to the user what phase and task you are picking up**, based on the BRD and Decision Log.
+4. **Confirm to Rogerio what phase and task you are picking up.**
 
 5. **Never hard-code colors, fonts, or content** — always reference design tokens from `BRAND_GUIDE.md`.
 
+6. **At the end of every session**, commit and push all updates to this repo:
+   - Update `DECISION_LOG.md` with any locked decisions
+   - Update `SESSION_NOTES.md` with what was done and what comes next
+   - Update the Phase Status table below
+   - Commit with message: `Session N: [brief summary]`
+   - Push to main branch
+
 ---
 
-## Project Overview (quick reference)
+## Project Overview
 
 | Item | Detail |
 |------|--------|
@@ -46,13 +55,13 @@ You are the primary developer and strategic advisor for the RG Enterprise Consul
 
 ---
 
-## Phase Status (update this after each session)
+## Phase Status (update after each session)
 
 | Phase | Name | Status | Notes |
 |-------|------|--------|-------|
-| Phase 1 | Brand & Design System | 🔴 Not Started | Blocked on BRD Q1 (colors) and Q2 (fonts) |
+| Phase 1 | Brand & Design System | 🔴 Not Started | Blocked on Q1 (colors) and Q2 (fonts) |
 | Phase 2 | Services & Lead Generation | 🔴 Not Started | Blocked on Phase 1 |
-| Phase 3 | Case Studies & Portfolio | 🔴 Not Started | Blocked on BRD Q4 (client naming) |
+| Phase 3 | Case Studies & Portfolio | 🔴 Not Started | Blocked on Q4 (client naming) |
 | Phase 4 | Insights Platform & SEO | 🔴 Not Started | — |
 | Phase 5 | Client Portal v2 | 🔴 Not Started | — |
 | Phase 6 | Super-Admin CMS | 🔴 Not Started | — |
@@ -81,13 +90,13 @@ You are the primary developer and strategic advisor for the RG Enterprise Consul
 ## How to Start a Session
 
 ### Option A — Continue from last session
-> "Read the brand repo and continue from where we left off. Last session we completed [X]. Today I want to work on [Y]."
+> "Read the brand repo and continue from where we left off."
 
 ### Option B — Answer open questions
-> "Read the brand repo. Here are my answers to the open questions: Q1: [answer], Q2: [answer]..."
+> "Read the brand repo. Here are my answers: Q1: [answer], Q2: [answer]..."
 
 ### Option C — Start a specific phase
-> "Read the brand repo and BRD. Start Phase 1 — Brand & Design System."
+> "Read the brand repo and start Phase 1."
 
 ---
 
@@ -97,23 +106,22 @@ You are the primary developer and strategic advisor for the RG Enterprise Consul
 brand/
 ├── README.md                               ← This file (Claude startup guide)
 ├── BRAND_GUIDE.md                          ← Colors, fonts, voice, assets spec
-├── DECISION_LOG.md                         ← All locked decisions (created when first decision is made)
+├── DECISION_LOG.md                         ← All locked decisions
 ├── SESSION_NOTES.md                        ← Running notes per session
 ├── RG_Enterprise_Consulting_BRD_v2.0.docx ← Full Business Requirements Document
-├── logo.png.png                            ← Primary logo (for dark backgrounds)
+├── logo.png.png                            ← Primary logo (dark backgrounds)
 ├── logo white.png                          ← White logo variant
 ├── favicon-32x32.png                       ← Browser favicon
-└── social-image.jpg                        ← OG / social share image
+├── social-image.jpg                        ← OG / social share image
+└── CLAUDE_PRIVATE.md                       ← GITIGNORED — contains GitHub token
 ```
 
 ---
 
 ## End-of-Session Checklist for Claude
 
-Before ending any session:
 - [ ] Summarize what was built or decided
-- [ ] Update `DECISION_LOG.md` with any locked decisions
+- [ ] Update `DECISION_LOG.md` with locked decisions
 - [ ] Update `SESSION_NOTES.md` with what was completed and what comes next
-- [ ] Update the Phase Status table above if any phase changed status
-- [ ] Tell Rogerio which files to commit to this brand repo
-- [ ] Tell Rogerio which files to commit to the website codebase repo
+- [ ] Update Phase Status table if any phase changed
+- [ ] Commit and push all changes to this repo

@@ -1,0 +1,4 @@
+CLAUDE_PRIVATE.md
+.env
+.env.local
+node_modules/
