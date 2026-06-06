@@ -11,7 +11,7 @@ All locked decisions are recorded here. Claude reads this at the start of every 
 | Jun 2026 | Q4 | **Case studies: anonymized by industry + size** | No company names. Describe by sector, revenue tier, geography. Zero fabrication — only data from Rogerio's resume. |
 | Jun 2026 | Q4b | **"Trusted By" bar: real company names + logos** | Partners: The Barton Partnership, UST Global, Smart Techlink Solutions. Clients: Vistra Group Asia, Equifax, Datavant, Ciox Health, Boa Vista Serviços, BizLatinHub |
 | Jun 2026 | Q5 | **AI Readiness: present as 100% RG** | Specialist partner delivers internally — not named or co-branded on website |
-| Jun 2026 | Q6 | **Calendly: YES** | Rogerio has Calendly. Link to be shared before Phase 2 build. Placeholder used until then. |
+| Jun 2026 | Q6 | **Calendly: CONFIRMED** | URL: https://calendly.com/rogerio-rgenterpriseconsulting/1-on-1-with-rogerio |
 | Jun 2026 | Q7 | **Email: SendGrid** | From: leads@rgenterpriseconsulting.com → To: rogerio@rgenterpriseconsulting.com. Domain verification required in SendGrid dashboard. |
 | Jun 2026 | Q8 | **LinkedIn company page confirmed active** | https://www.linkedin.com/company/rg-enterprise-consulting/ |
 | Jun 2026 | Q9 | **WhatsApp: +1 (310) 430-6698 confirmed** | WhatsApp Business number. Keep floating button. Expand with automation/bots in a future phase. |
