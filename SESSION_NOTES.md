@@ -3,84 +3,79 @@
 
 ---
 
-## Session 1 — June 2026
+## Session 1 — June 2026 (Full Session — Planning + Build)
 
-### What was accomplished
-- Uploaded and fully audited v1.4 codebase
-- Conducted market research (Stonehill Innovation, Airiodion Group, 733Park)
+### Planning Phase
+- Audited v1.4 codebase in full (all pages, components, Firebase config)
+- Conducted market research: Stonehill Innovation, Airiodion Group, 733Park
 - Defined 4 service lines: PMI, AI Readiness, Digital Transformation, Business Transformation
-- Created BRD v2.0 (Word document, 9 sections)
-- Set up brand repo at https://github.com/rogerio-rsesystems/brand with GitHub PAT for autonomous push
-- Locked ALL 10 BRD open questions (see DECISION_LOG.md)
-- Established complete brand system: Navy+Gold palette, Montserrat+Inter fonts
+- Created BRD v2.1 (Word doc, 9 sections, all decisions locked)
+- Set up brand repo + GitHub PAT for autonomous Claude push access
+- Locked all 10 BRD open questions
 
-### All decisions locked this session
-- ✅ Colors: Navy `#1B2A4A` + Gold `#C8A84B` on white
-- ✅ Fonts: Montserrat 800 headings + Inter body
-- ✅ Testimonials: realistic placeholders
-- ✅ Case studies: anonymized by industry/size, zero fabrication
-- ✅ Trusted By bar: real logos (The Barton Partnership, UST Global, Smart Techlink Solutions, Vistra, Equifax, Datavant, Ciox Health, Boa Vista Serviços, BizLatinHub)
-- ✅ AI Readiness: presented as 100% RG
-- ✅ Calendly: confirmed, link TBD (share at start of Session 2)
-- ✅ Email: SendGrid from leads@ to rogerio@
-- ✅ LinkedIn: https://www.linkedin.com/company/rg-enterprise-consulting/
-- ✅ WhatsApp: +1 (310) 430-6698, WhatsApp Business, keep + expand later
-- ✅ Client portal: rebuild in-house (Phase 5)
+### Build Phase — Phase 1 Complete
+All files pushed to `version-2.0` branch of website repo.
 
-### Critical bugs to fix in Phase 1/2
-1. Contact form posts to dead endpoint — all leads lost
-2. Zero SEO on any page
-3. Fake "Jane Doe" testimonial on homepage
-4. Footer links to /client-login (wrong path)
-5. Firebase credentials likely in Git
+**Files created/modified:**
 
-### What comes next — Session 2
-**Start of session:** Rogerio shares Calendly link
-**Phase 1 build order:**
-1. `tailwind.config.js` — design token system (colors, fonts, spacing)
-2. `src/theme.js` — central token file
-3. `Navbar.jsx` — v2 (navy bg, gold CTA, Montserrat logo)
-4. `Footer.jsx` — v2 (navy bg, all correct links, WhatsApp, LinkedIn)
-5. `Home.jsx` — v2 (new hero, trusted-by bar, services, stats, placeholder testimonials, CTA)
-6. `About.jsx` — v2 (Rogerio's story, credentials, career timeline)
-7. SEO foundation — react-helmet-async on all pages
+| File | Status | Notes |
+|------|--------|-------|
+| `tailwind.config.js` | ✅ Done | Navy+Gold tokens, Montserrat+Inter, custom shadows/animations |
+| `src/theme.js` | ✅ Done | Central content/token file — all contact info, services, stats, logos, timeline |
+| `src/index.css` | ✅ Done | Google Fonts import, white base (removed dark body), utility classes |
+| `src/main.jsx` | ✅ Done | Added HelmetProvider for SEO |
+| `src/App.jsx` | ✅ Done | Added /insights placeholder route |
+| `src/components/Navbar.jsx` | ✅ Done | Navy, white logo, gold CTA → /contact, mobile overlay, Client Portal in footer |
+| `src/components/Footer.jsx` | ✅ Done | Dark navy, 4-col layout, company LinkedIn, X (@rgeconsulting), WhatsApp, contact email footer-only |
+| `src/pages/Home.jsx` | ✅ Done v3 | Hero slideshow, stats, animated ticker, services, case teasers, testimonials, CTA |
+| `src/pages/About.jsx` | ⚠️ Needs Rewrite | Built but still too resume-focused. Needs company-first rewrite. |
+| `package.json` | ✅ Done | Added react-helmet-async |
+| `.github/workflows/firebase-deploy.yml` | ⚠️ Blocked | PAT needs `workflow` scope to push this file |
+| `firebase.json` | ✅ Done | Updated with cache headers, node18 runtime |
+| `public/logos/*.png` | ✅ Done | All 9 real logos: Barton, UST, SmartTechlink, Vistra, Equifax, Datavant, Ciox, BoaVista, BizLatinHub |
+| `public/photos/rogerio-headshot.jpg` | ✅ Done | Professional headshot uploaded by Rogerio |
 
-### How to start Session 2
-> "Read the brand repo at https://github.com/rogerio-rsesystems/brand — token in CLAUDE_PRIVATE.md. All decisions are locked. Here is my Calendly link: [link]. Start Phase 1 build."
+### Design Decisions Made During Build
+- Rejected: Playfair Display (too old-fashioned), dark-only theme, Calendly as primary CTA
+- Rejected: Personal credentials in hero section
+- Approved: Navy+Gold palette, Montserrat 800 headings, company-first language
+- Approved: "Contact Us" → form as primary CTA. "Let us solve your problem" as bottom CTA
+- Approved: contact@ email in footer only, not shown elsewhere
+- Approved: Ticker with grayscale logos (color on hover), uniform 138×50px slots
+- Fixed: Vistra + Boa Vista logo proportions (whitespace cropped, 15% size increase)
+
+### Critical Bugs Still Open (fix in Phase 2)
+1. **Contact form dead endpoint** — posts to `/api/sendContactEmail`, never wired. ALL LEADS LOST.
+2. **Firebase Functions not deployed** — SendGrid integration not built
+3. **GitHub Actions PAT needs `workflow` scope** — go to github.com/settings/tokens → add `workflow` scope to the Claude RG Consulting token
+
+### Development Setup (Rogerio's computer)
+- OS: Windows
+- Git: installed ✅
+- Node.js: installed ✅
+- Project cloned to Desktop: `rgenterpriseconsulting/`
+- Active branch: `version-2.0`
+- Local preview confirmed working at `http://localhost:5173`
+- Moving to Claude Code for future development
 
 ---
 
-## Session 1 — Continued (Phase 1 Build)
+## Next Session — Phase 2 Priorities
 
-### Phase 1 files built and delivered
-All files are drop-in replacements for the existing v1.4 files.
+1. **About page rewrite** — company-first, Rogerio as founder not CV subject
+2. **Services pages** — 4 sub-pages (/services/post-merger-integration, /services/ai-readiness, /services/digital-transformation, /services/business-transformation)
+3. **Contact form fix** — Firebase Function + SendGrid + Firestore lead storage
+4. **Enriched lead form** — new fields: company size, timeline, challenge, how they found us
+5. **Calendly integration** — shown only after form submission confirmation
 
-| File | Path in project | What it does |
-|------|----------------|--------------|
-| `tailwind.config.js` | root | Full design token system — Navy+Gold palette, Montserrat+Inter fonts, shadows, animations |
-| `src/theme.js` | src/ | Central JS token export — colors, fonts, contact info, services, stats, trustedBy, credentials, career timeline. Import in any component — never hard-code content again. |
-| `src/index.css` | src/ | New base styles — imports Google Fonts, resets dark body, defines btn-gold, btn-navy-outline, card, eyebrow utilities |
-| `src/components/Navbar.jsx` | src/components/ | New navbar — navy bg, white logo, gold CTA, sticky + scroll shadow, mobile overlay menu, Client Portal link moved to footer |
-| `src/components/Footer.jsx` | src/components/ | New footer — dark navy, 4-column layout, correct links, WhatsApp + LinkedIn icons, gold CTA button |
-| `src/pages/Home.jsx` | src/pages/ | Full homepage — hero, stats bar, trusted-by, 4 service cards, 2 case study teasers, rotating testimonials, CTA section. SEO meta tags via react-helmet-async. |
-| `src/pages/About.jsx` | src/pages/ | Full about page — bio, credentials grid, career timeline, agency model section, CTA. JSON-LD Person schema. |
-
-### Installation steps for Rogerio
-1. Unzip `phase1_files.zip`
-2. Replace the following files in your project with the new versions:
-   - `tailwind.config.js`
-   - `src/index.css`
-   - `src/theme.js` (new file — add to src/)
-   - `src/components/Navbar.jsx`
-   - `src/components/Footer.jsx`
-   - `src/pages/Home.jsx`
-   - `src/pages/About.jsx`
-3. Install react-helmet-async: `npm install react-helmet-async`
-4. Wrap your app in `<HelmetProvider>` in `src/main.jsx`
-5. Run `npm run dev` to preview
-
-### What comes next — Phase 2
-- Services pages (4 sub-pages)
-- Contact form fix — Firebase Function + SendGrid
-- Enriched lead form
-- Calendly embed integration
+### How to Start in Claude Code
+```
+cd Desktop/rgenterpriseconsulting
+git checkout version-2.0
+git pull
+claude
+```
+Then say:
+> "Read https://github.com/rogerio-rsesystems/brand — this is my brand and project reference. 
+> Token: [TOKEN-IN-CLAUDE-PRIVATE-MD]
+> We are on Phase 2. Start with the About page rewrite."
