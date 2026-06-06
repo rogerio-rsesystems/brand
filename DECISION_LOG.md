@@ -16,7 +16,7 @@ All locked decisions are recorded here. Claude Code reads this at the start of e
 | Jun 2026 | Q4b | **Trusted By: real PNG logos** | All 9 logos uploaded and in `/public/logos/`. See asset list below. |
 | Jun 2026 | Q5 | **AI Readiness: 100% RG brand** | Specialist partner not named. Presented as RG Enterprise Consulting service. |
 | Jun 2026 | Q6 | **Calendly confirmed** | https://calendly.com/rogerio-rgenterpriseconsulting/1-on-1-with-rogerio |
-| Jun 2026 | Q7 | **Email: SendGrid** | From: `leads@rgenterpriseconsulting.com` → To: `rogerio@rgenterpriseconsulting.com` |
+| Jun 2026 | Q7 | **Email: Ionos SMTP + Nodemailer** | SendGrid dropped — own SMTP via Ionos. Server: smtp.ionos.com port 587. From: leads@rgenterpriseconsulting.com → To: rogerio@rgenterpriseconsulting.com. Credentials in Firebase environment secrets. Firestore backup on every submission. |
 | Jun 2026 | Q8 | **LinkedIn company page** | https://www.linkedin.com/company/rg-enterprise-consulting/ |
 | Jun 2026 | Q9 | **WhatsApp Business: +1 (310) 430-6698** | Keep floating button. Future phase: automation, bots, multi-language (EN/PT/ES) |
 | Jun 2026 | Q10 | **Client portal: rebuild in-house** | Firebase Auth + Firestore. Full rebuild in Phase 5. |
