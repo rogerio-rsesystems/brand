@@ -47,3 +47,40 @@
 
 ### How to start Session 2
 > "Read the brand repo at https://github.com/rogerio-rsesystems/brand — token in CLAUDE_PRIVATE.md. All decisions are locked. Here is my Calendly link: [link]. Start Phase 1 build."
+
+---
+
+## Session 1 — Continued (Phase 1 Build)
+
+### Phase 1 files built and delivered
+All files are drop-in replacements for the existing v1.4 files.
+
+| File | Path in project | What it does |
+|------|----------------|--------------|
+| `tailwind.config.js` | root | Full design token system — Navy+Gold palette, Montserrat+Inter fonts, shadows, animations |
+| `src/theme.js` | src/ | Central JS token export — colors, fonts, contact info, services, stats, trustedBy, credentials, career timeline. Import in any component — never hard-code content again. |
+| `src/index.css` | src/ | New base styles — imports Google Fonts, resets dark body, defines btn-gold, btn-navy-outline, card, eyebrow utilities |
+| `src/components/Navbar.jsx` | src/components/ | New navbar — navy bg, white logo, gold CTA, sticky + scroll shadow, mobile overlay menu, Client Portal link moved to footer |
+| `src/components/Footer.jsx` | src/components/ | New footer — dark navy, 4-column layout, correct links, WhatsApp + LinkedIn icons, gold CTA button |
+| `src/pages/Home.jsx` | src/pages/ | Full homepage — hero, stats bar, trusted-by, 4 service cards, 2 case study teasers, rotating testimonials, CTA section. SEO meta tags via react-helmet-async. |
+| `src/pages/About.jsx` | src/pages/ | Full about page — bio, credentials grid, career timeline, agency model section, CTA. JSON-LD Person schema. |
+
+### Installation steps for Rogerio
+1. Unzip `phase1_files.zip`
+2. Replace the following files in your project with the new versions:
+   - `tailwind.config.js`
+   - `src/index.css`
+   - `src/theme.js` (new file — add to src/)
+   - `src/components/Navbar.jsx`
+   - `src/components/Footer.jsx`
+   - `src/pages/Home.jsx`
+   - `src/pages/About.jsx`
+3. Install react-helmet-async: `npm install react-helmet-async`
+4. Wrap your app in `<HelmetProvider>` in `src/main.jsx`
+5. Run `npm run dev` to preview
+
+### What comes next — Phase 2
+- Services pages (4 sub-pages)
+- Contact form fix — Firebase Function + SendGrid
+- Enriched lead form
+- Calendly embed integration
