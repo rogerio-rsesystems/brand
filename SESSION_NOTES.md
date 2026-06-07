@@ -93,6 +93,10 @@ All files pushed to `version-2.0` branch of website repo.
 | Photo src | LinkedIn CDN URL (external, can expire) | `/photos/rogerio-headshot.jpg` (local, permanent) |
 | CTA primary button | "Schedule a Free Consultation" (Calendly) | "Contact Us" (→ /contact) — matches locked CTA decision |
 
+### Correction — Email Provider Decision (Same Session)
+Rogerio reviewed the About page rewrite and flagged two things:
+1. **About page still too Rogerio-centric** — even after the company-first rewrite, it leans too much on the founder. OPEN — revisit in a future session with a sharper edit pass (reduce founder section length / visual weight relative to firm sections).
+2. **Email provider decision was recorded incorrectly** — DECISION_LOG.md and the BRD said "SendGrid" (Q7), but that was abandoned during Phase 2 planning. The actual decision: **use IONOS SMTP relay via Nodemailer** inside the Firebase Function (not SendGrid). DECISION_LOG.md Q7 corrected accordingly (commit `cab1021`). NOTE: the BRD .docx (Section 8 Q7 + Section 10.1 Q7) still says SendGrid — should be corrected there too when the BRD is next opened for editing, so the documents stay consistent. DECISION_LOG.md is the authoritative source going forward.
 ### Commit Reference
 - Branch: `version-2.0`
 - Commit: `8f83c70`
