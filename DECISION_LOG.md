@@ -161,3 +161,29 @@ Collection: `leads` — fields per document:
 - Lead qualification bot
 - Appointment booking via WhatsApp
 - Multi-language: EN / PT / ES
+
+---
+
+## Security Decisions ✅ Locked — Phase 2 (June 2026)
+
+| Date | Decision | Detail |
+|------|----------|--------|
+| Jun 2026 | **Bot protection: reCAPTCHA v3** | Google reCAPTCHA v3 (invisible, score-based). Site Key: `6LcfqhItAAAAACmRAnAmBDoklGo77ohebIbd3eJy`. Secret Key stored as Firebase secret `RECAPTCHA_SECRET`. Score threshold: 0.4 (below = blocked). Domains: rgenterpriseconsulting.com, www.rgenterpriseconsulting.com, rgenterpriseconsulting-d90fa.web.app, localhost. |
+| Jun 2026 | **Rate limiting: 5 per IP per hour** | Server-side rate limiting in Firebase Function. Max 5 form submissions per IP per hour. Stored in Firestore `meta` collection. Resets automatically. Fails open (never blocks real users if Firestore is unavailable). |
+| Jun 2026 | **Firestore rules: full lockdown** | leads collection: no public read/write — Firebase Functions only. meta collection: completely locked. users: own profile only. projects/documents: assigned client only. articles: published readable by all, write admin-only. Default: deny everything. |
+| Jun 2026 | **HTTP Security Headers** | X-Frame-Options: DENY. X-Content-Type-Options: nosniff. Strict-Transport-Security: max-age=31536000 (1 year HTTPS enforced). Referrer-Policy: strict-origin-when-cross-origin. Permissions-Policy: camera/mic/geo/payment all disabled. Content-Security-Policy: whitelists Google reCAPTCHA, Firebase, Unsplash, Google Fonts only. |
+| Jun 2026 | **reCAPTCHA badge position** | Badge repositioned to `bottom: 90px` on contact page to avoid overlapping WhatsApp floating button. CSS injected via useEffect on Contact page only. |
+| Jun 2026 | **No Cloudflare for now** | DNS stays on Ionos. Firebase Hosting provides Google-level DDoS protection. App Check + reCAPTCHA sufficient for launch. Revisit Cloudflare migration post-launch if needed. |
+| Jun 2026 | **Firebase App Check** | Registered web app in Firebase App Check console with reCAPTCHA v3 provider. Status: Unregistered → registered during Phase 2. |
+
+---
+
+## Contact Form — Fully Complete ✅ Phase 2 (June 2026)
+
+| Date | Decision | Detail |
+|------|----------|--------|
+| Jun 2026 | **3-step form flow** | Step 1: Who are you (name, title, email, phone, company, website). Step 2: What do you need (service, industry, size, challenge, timeline, budget). Step 3: Final (how found us, additional notes, summary card, submit). |
+| Jun 2026 | **Form endpoint** | Posts directly to Firebase Function HTTPS endpoint. No /api/ proxy. URL: https://us-central1-rgenterpriseconsulting-d90fa.cloudfunctions.net/sendContactEmail |
+| Jun 2026 | **Thank-you screen** | Shows Opportunity ID (RGE-YYYY-NNNN) in gold. Calendly button appears here ONLY — first and only time shown. "Submit another inquiry" link. |
+| Jun 2026 | **Institutional language** | "What Happens Next" step 02: "A member of our team reaches out" — NOT "Rogerio personally reaches out". Company-first, scalable language throughout. |
+| Jun 2026 | **Contact form: COMPLETE** | All fields, security, scoring, AI enrichment, Opportunity ID, email notifications, Firestore backup — fully tested and working in production. |

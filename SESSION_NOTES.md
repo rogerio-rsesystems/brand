@@ -197,3 +197,44 @@ Claude Code started on Rogerio's Windows machine. Phase 2 priorities:
 3. Update firebase.json rewrite rule to point to correct function URL
 4. Build Services sub-pages (4 pages)
 5. Fix GitHub Actions PAT scope for auto-deploy
+
+---
+
+## Session 1 — Continued (Contact Form + Security Complete)
+
+### What was completed
+- Contact.jsx fully rebuilt — 3-step form, Navy+Gold design, all new fields
+- Connected to live Firebase Function endpoint
+- Opportunity ID displayed on thank-you screen
+- Calendly shown post-form only (never before)
+- Institutional language throughout ("a member of our team")
+- reCAPTCHA v3 wired invisibly — score threshold 0.4
+- Rate limiting: 5 submissions per IP per hour (Firestore-backed)
+- Firestore security rules fully locked down
+- HTTP security headers deployed (CSP, HSTS, X-Frame-Options, etc.)
+- reCAPTCHA badge repositioned above WhatsApp button
+- End-to-end tested: form → reCAPTCHA → Firebase Function → AI enrichment → Firestore → email notification with Opportunity ID ✅
+
+### Security stack confirmed
+- reCAPTCHA v3 (invisible, score-based) — Site Key: 6LcfqhItAAAAACmRAnAmBDoklGo77ohebIbd3eJy
+- RECAPTCHA_SECRET stored as Firebase secret
+- Rate limiting: 5/IP/hour
+- Firestore rules: full lockdown
+- HTTP headers: CSP, HSTS, X-Frame-Options, Permissions-Policy
+
+### Phase 2 status
+- ✅ About page rewrite (company-first)
+- ✅ Firebase Functions (Ionos SMTP, AI enrichment, lead scoring, Opportunity ID)
+- ✅ Contact form (3-step, all fields, security, fully tested)
+- 🔴 Services sub-pages (4 pages) — NEXT
+- 🔴 WhatsApp floating button review
+- 🔴 firebase.json rewrite rule audit
+
+### What comes next — Services Pages
+4 sub-pages to build:
+- /services/post-merger-integration
+- /services/ai-readiness
+- /services/digital-transformation
+- /services/business-transformation
+
+Each page: hero, challenge/solution framing, sub-services checklist, case study teaser, FAQ, CTA to /contact
