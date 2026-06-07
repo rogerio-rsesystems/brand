@@ -16,7 +16,7 @@ All locked decisions are recorded here. Claude Code reads this at the start of e
 | Jun 2026 | Q4b | **Trusted By: real PNG logos** | All 9 logos uploaded and in `/public/logos/`. See asset list below. |
 | Jun 2026 | Q5 | **AI Readiness: 100% RG brand** | Specialist partner not named. Presented as RG Enterprise Consulting service. |
 | Jun 2026 | Q6 | **Calendly confirmed** | https://calendly.com/rogerio-rgenterpriseconsulting/1-on-1-with-rogerio |
-| Jun 2026 | Q7 | **Email: IONOS SMTP + Nodemailer** | IONOS SMTP + Nodemailer abandoned (Phase 2 decision change). Use IONOS SMTP relay via Nodemailer in the Firebase Function. From: `leads@rgenterpriseconsulting.com` -> To: `rogerio@rgenterpriseconsulting.com` |
+| Jun 2026 | Q7 | **Email: IONOS SMTP + Nodemailer** | DECISION CHANGED in Phase 2 — original plan was SendGrid; abandoned in favor of IONOS SMTP relay via Nodemailer inside the Firebase Function. From: `leads@rgenterpriseconsulting.com` -> To: `rogerio@rgenterpriseconsulting.com` |
 | Jun 2026 | Q8 | **LinkedIn company page** | https://www.linkedin.com/company/rg-enterprise-consulting/ |
 | Jun 2026 | Q9 | **WhatsApp Business: +1 (310) 430-6698** | Keep floating button. Future phase: automation, bots, multi-language (EN/PT/ES) |
 | Jun 2026 | Q10 | **Client portal: rebuild in-house** | Firebase Auth + Firestore. Full rebuild in Phase 5. |
@@ -92,7 +92,7 @@ Note: Vistra and Boa Vista logos were whitespace-cropped in Jun 2026 to fix prop
 | Priority | Item | Added |
 |----------|------|-------|
 | 🔴 CRITICAL | **Contact form dead endpoint** — posts to `/api/sendContactEmail`, never wired. ALL LEADS LOST. | Phase 1 |
-| (red)CRITICAL | **Firebase Functions not deployed** -- IONOS SMTP + Nodemailer integration not built. | Phase 1 |
+| 🔴 CRITICAL | **Firebase Functions not deployed** — IONOS SMTP + Nodemailer integration not built. | Phase 1 |
 | 🔴 HIGH | **Services sub-pages** — 4 pages: /services/post-merger-integration, /services/ai-readiness, /services/digital-transformation, /services/business-transformation | Phase 1 |
 | 🔴 HIGH | **Enriched lead form** — company size, timeline, challenge, how they found us, lead scoring | Phase 1 |
 | 🟡 MED | **GitHub Actions PAT needs `workflow` scope** — add at github.com/settings/tokens | Phase 1 |
