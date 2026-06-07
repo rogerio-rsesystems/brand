@@ -160,3 +160,40 @@ Claude Code started on Rogerio's Windows machine. Phase 2 priorities:
 - Ionos SMTP credentials to be provided by Rogerio and stored as Firebase secrets
 - leads@rgenterpriseconsulting.com must exist as a mailbox in Ionos before deploying
 - All work on version-2.0 branch only
+
+---
+
+## Session 1 — Continued (Firebase Functions Complete)
+
+### What was completed
+- Firebase CLI installed and configured on Rogerio's Windows machine
+- 5 Firebase secrets set via `firebase functions:secrets:set`:
+  - SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASSWORD (Ionos SMTP)
+  - ANTHROPIC_API_KEY (Claude API for AI enrichment)
+- functions/index.js fully rewritten with:
+  - Ionos SMTP via Nodemailer (replaces broken SendGrid approach)
+  - Lead scoring 0-100 (budget + timeline + company size + job title + website + phone)
+  - AI company intelligence via Claude API (claude-sonnet-4-5)
+  - Firestore lead backup on every submission
+  - Rich HTML notification email to rogerio@ with score badge and AI paragraph
+  - Auto-reply to client with Calendly booking link
+- Function deployed to Firebase (Node.js 20, us-central1)
+- gcloud CLI installed, function made publicly invocable (allUsers invoker)
+- End-to-end test confirmed: ✅ Firestore save, ✅ AI enrichment, ✅ emails sent
+- Bug fixed: wrong Claude model name (claude-sonnet-4-20250514 → claude-sonnet-4-5)
+
+### Firebase secrets in production
+| Secret | Purpose |
+|--------|---------|
+| SMTP_HOST | smtp.ionos.com |
+| SMTP_PORT | 587 |
+| SMTP_USER | leads@rgenterpriseconsulting.com |
+| SMTP_PASSWORD | Ionos mailbox password |
+| ANTHROPIC_API_KEY | Claude API for AI company enrichment |
+
+### What comes next — Phase 2 continued
+1. Build Contact.jsx — 3-step form with all new fields
+2. Wire Contact.jsx to the Firebase Function endpoint
+3. Update firebase.json rewrite rule to point to correct function URL
+4. Build Services sub-pages (4 pages)
+5. Fix GitHub Actions PAT scope for auto-deploy
