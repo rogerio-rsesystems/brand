@@ -1,7 +1,7 @@
 # Decision Log
 ## RG Enterprise Consulting — Website & Platform Project
 
-All locked decisions are recorded here. Claude Code reads this at the start of every session.
+All locked decisions are recorded here. Claude reads this at the start of every session.
 
 ---
 
@@ -13,46 +13,103 @@ All locked decisions are recorded here. Claude Code reads this at the start of e
 | Jun 2026 | Q2 | **Fonts: Montserrat + Inter** | Headings: Montserrat 800. Body: Inter 400/500/600. Playfair Display rejected ("too 80s"). |
 | Jun 2026 | Q3 | **Testimonials: realistic placeholders** | 3 anonymized placeholder quotes in use. Replace with real quotes when available. |
 | Jun 2026 | Q4 | **Case studies: anonymized by industry + size** | No company names. Fortune 500 / sector / geography descriptions only. Zero fabrication. |
-| Jun 2026 | Q4b | **Trusted By: real PNG logos** | All 9 logos uploaded and in `/public/logos/`. See asset list below. |
+| Jun 2026 | Q4b | **Trusted By: real PNG logos** | All 9 logos in `/public/logos/`. Vistra + Boa Vista whitespace-cropped for proportion fix. |
 | Jun 2026 | Q5 | **AI Readiness: 100% RG brand** | Specialist partner not named. Presented as RG Enterprise Consulting service. |
 | Jun 2026 | Q6 | **Calendly confirmed** | https://calendly.com/rogerio-rgenterpriseconsulting/1-on-1-with-rogerio |
-| Jun 2026 | Q7 | **Email: IONOS SMTP + Nodemailer** | DECISION CHANGED in Phase 2 — original plan was SendGrid; abandoned in favor of IONOS SMTP relay via Nodemailer inside the Firebase Function. From: `leads@rgenterpriseconsulting.com` -> To: `rogerio@rgenterpriseconsulting.com` |
+| Jun 2026 | Q7 | **Email: Ionos SMTP + Nodemailer** | SendGrid rejected. Own SMTP via Ionos. smtp.ionos.com port 587. From: leads@rgenterpriseconsulting.com → To: rogerio@rgenterpriseconsulting.com. Credentials in Firebase secrets. |
 | Jun 2026 | Q8 | **LinkedIn company page** | https://www.linkedin.com/company/rg-enterprise-consulting/ |
-| Jun 2026 | Q9 | **WhatsApp Business: +1 (310) 430-6698** | Keep floating button. Future phase: automation, bots, multi-language (EN/PT/ES) |
-| Jun 2026 | Q10 | **Client portal: rebuild in-house** | Firebase Auth + Firestore. Full rebuild in Phase 5. |
+| Jun 2026 | Q9 | **WhatsApp Business: +1 (310) 430-6698** | Keep floating button. Future: automation, bots, multi-language EN/PT/ES. |
+| Jun 2026 | Q10 | **Client portal: rebuild in-house** | Firebase Auth + Firestore. Full rebuild Phase 5. |
 
 ---
 
-## UX & Content Decisions ✅ Locked During Build
+## UX & Content Decisions ✅ Locked
 
 | Date | Decision | Detail |
 |------|----------|--------|
-| Jun 2026 | **Lead flow: Contact form first, Calendly second** | "Contact Us" button → `/contact` form. Calendly only shown AFTER form is submitted. No Calendly link on homepage. |
-| Jun 2026 | **CTA language** | Primary: "Contact Us". Bottom CTA: "Let us solve your problem." NOT "Send us a message" or "Schedule a Call" as primary. |
-| Jun 2026 | **Contact email: footer only** | `contact@rgenterpriseconsulting.com` shown in footer only. Not on hero, not next to CTA buttons, not on About page. |
-| Jun 2026 | **Company-first branding** | Website promotes RG Enterprise Consulting as a boutique agency. Rogerio is "Founder & Principal Consultant" — not the headline. Personal credentials (Wharton, GT, Stanford) belong on About page only. |
-| Jun 2026 | **Social media on website** | LinkedIn: company page. X/Twitter: @rgeconsulting. WhatsApp: Business number. All in footer. |
-| Jun 2026 | **Trusted By ticker** | Auto-scrolling infinite ticker. Grayscale 45% opacity, full color on hover. Fade masks on edges. Uniform 138×50px slots for all logos. |
-| Jun 2026 | **Hero: background slideshow** | 4 Unsplash office/business photos fade in/out every 5s behind navy overlay. Slide dot indicators. Rogerio headshot on right panel (desktop only). |
-| Jun 2026 | **Headshot** | File: `/public/photos/rogerio-headshot.jpg` — professional photo uploaded by Rogerio (Jun 2026). |
+| Jun 2026 | **Lead flow: Contact form first, Calendly second** | "Contact Us" → `/contact` form. Calendly shown ONLY after form submitted on thank-you screen. Never on homepage. |
+| Jun 2026 | **CTA language** | Primary: "Contact Us". Bottom CTA: "Let us solve your problem." |
+| Jun 2026 | **Contact email: footer only** | `contact@rgenterpriseconsulting.com` in footer ONLY. Not on hero, not next to CTAs. |
+| Jun 2026 | **Company-first branding** | Promotes RG Enterprise Consulting as boutique agency. Rogerio = "Founder & Principal Consultant" — not the headline. |
+| Jun 2026 | **Social media** | LinkedIn: company page. X: @rgeconsulting. WhatsApp Business. All in footer. |
+| Jun 2026 | **Trusted By ticker** | Auto-scrolling, grayscale 45% opacity, full color on hover, fade masks, 138×50px uniform slots. |
+| Jun 2026 | **Hero: background slideshow** | 4 Unsplash photos fade every 5s behind navy overlay. Rogerio headshot right panel (desktop). |
+| Jun 2026 | **Headshot** | `/public/photos/rogerio-headshot.jpg` — professional photo uploaded Jun 2026. |
 
 ---
 
-## About Page Decisions ✅ Locked — Phase 2 Rewrite (Jun 2026)
+## About Page ✅ Rewritten Phase 2
 
 | Date | Decision | Detail |
 |------|----------|--------|
-| Jun 2026 | **Page title: firm-first** | `<title>` is "About RG Enterprise Consulting — Boutique Management Consulting". NOT "About Rogerio Gomes". |
-| Jun 2026 | **H1: firm-first** | H1 reads "About RG Enterprise Consulting". No personal name in the hero heading. |
-| Jun 2026 | **Section order** | Why We Exist → Agency Model → Founder → Multilingual → Career Timeline → CTA. Agency model promoted above founder bio. |
-| Jun 2026 | **Founder section framing** | Eyebrow: "The Experience Behind the Firm". Rogerio is positioned as proof of firm capability, not the subject of the page. |
-| Jun 2026 | **Personal statement included** | Authentic quote block from Rogerio: "I built this firm because too many organizations get sold strategy they can't execute..." Required by BRD Section 5.1.4. |
-| Jun 2026 | **Multilingual section** | Dedicated navy callout banner for EN / PT / ES / IT. BRD requirement. Positioned between Founder and Timeline sections. |
-| Jun 2026 | **Career timeline reframed** | Section eyebrow: "The Track Record". Heading: "15+ Years of Enterprise Delivery". Subtext: "The depth of experience that powers every RG Enterprise Consulting engagement." |
-| Jun 2026 | **Photo: local file only** | `src="/photos/rogerio-headshot.jpg"` — the LinkedIn CDN URL was removed. LinkedIn CDN URLs expire and can break. |
-| Jun 2026 | **JSON-LD schema** | Changed from `Person` to `Organization` with nested `founder: Person`. Matches BRD company-first positioning. |
-| Jun 2026 | **Contact card simplified** | Removed email from the under-photo card (footer-only rule). Kept: name, title, location, LinkedIn link. |
-| Jun 2026 | **CTA: company-centric** | Headline: "Ready to Start Your Transformation?" Subtext: "We work with a select number of clients at a time — let's see if we're the right fit." Primary button: "Contact Us" → /contact (NOT Calendly as primary). |
+| Jun 2026 | **Firm-first H1** | "About RG Enterprise Consulting" — not "About Rogerio Gomes" |
+| Jun 2026 | **Section order** | Why We Exist → Agency Model → Founder → Multilingual → Career Timeline → CTA |
+| Jun 2026 | **Founder framing** | Eyebrow: "The Experience Behind the Firm". Rogerio = proof of firm capability. |
+| Jun 2026 | **Local headshot** | `/photos/rogerio-headshot.jpg` — LinkedIn CDN URL removed (expires and breaks). |
+| Jun 2026 | **JSON-LD** | Organization schema with nested founder Person. Not Person schema. |
+
+---
+
+## Firebase Backend ✅ Fully Deployed — Phase 2
+
+| Date | Decision | Detail |
+|------|----------|--------|
+| Jun 2026 | **Firebase Functions runtime** | Node.js 20 (Node 18 decommissioned Oct 2025) |
+| Jun 2026 | **Email library** | Nodemailer via Ionos SMTP — no third-party service |
+| Jun 2026 | **Lead storage** | Every submission saved to Firestore `leads` collection — never lose a lead |
+| Jun 2026 | **Lead scoring** | 0–100 score: budget (25pts) + timeline (25pts) + company size (20pts) + job title seniority (15pts) + has website (10pts) + provided phone (5pts) |
+| Jun 2026 | **Score labels** | 🔥 HOT (75+) / ⚡ WARM (50-74) / ❄️ COLD (25-49) / 👀 UNSCORED (<25) |
+| Jun 2026 | **AI enrichment** | Claude API (claude-sonnet-4-5) generates company intelligence paragraph per lead — appears in notification email |
+| Jun 2026 | **AI enrichment content** | Company description, recent M&A/PE activity, digital/AI initiatives, why they need RG now, key talking point for first call |
+| Jun 2026 | **Notification email** | To: rogerio@rgenterpriseconsulting.com. Subject: `{label} New Lead: {service} — {name} ({company}) | Score: {n}/100` |
+| Jun 2026 | **Auto-reply email** | Sent to lead confirming receipt. Includes inquiry summary + Calendly button. |
+| Jun 2026 | **Public function access** | `allUsers` invoker role granted via gcloud IAM for HTTPS callable endpoint |
+
+---
+
+## Firebase Secrets in Production ✅
+
+| Secret Name | Value | Purpose |
+|------------|-------|---------|
+| `SMTP_HOST` | smtp.ionos.com | Ionos SMTP server |
+| `SMTP_PORT` | 587 | STARTTLS port |
+| `SMTP_USER` | leads@rgenterpriseconsulting.com | Sender address |
+| `SMTP_PASSWORD` | [secured] | Ionos mailbox password |
+| `ANTHROPIC_API_KEY` | [secured] | Claude API for AI enrichment |
+
+---
+
+## Firestore Lead Schema ✅ Live
+
+Collection: `leads` — fields per document:
+
+| Field | Type | Notes |
+|-------|------|-------|
+| fullName | string | Required |
+| jobTitle | string | For lead scoring |
+| email | string | Required |
+| phoneNumber | string | Optional — +5pts score |
+| companyName | string | Required |
+| companyWebsite | string | For AI enrichment lookup |
+| industry | string | Dropdown — 10 sectors |
+| companySize | string | Dropdown |
+| serviceOfInterest | string | Required — 4 RG services |
+| challenge | string | Open text |
+| timeline | string | Dropdown |
+| projectBudget | string | Dropdown |
+| howFoundUs | string | Attribution |
+| message | string | Optional extra text |
+| status | string | new/contacted/qualified/proposal/won/lost |
+| source | string | contact_form |
+| score | number | 0–100 |
+| scoreLabel | string | 🔥 HOT / ⚡ WARM / ❄️ COLD |
+| assignedTo | string | rogerio@rgenterpriseconsulting.com |
+| followUpDate | timestamp | null initially |
+| notes | array | Internal notes array |
+| enrichment.status | string | complete/failed |
+| enrichment.summary | string | AI paragraph |
+| enrichment.runAt | string | ISO timestamp |
+| timestamp | timestamp | Server timestamp |
 
 ---
 
@@ -70,16 +127,14 @@ All locked decisions are recorded here. Claude Code reads this at the start of e
 | `boavista.png` | Boa Vista Serviços | End client |
 | `bizlatinhub.png` | BizLatinHub | End client |
 
-Note: Vistra and Boa Vista logos were whitespace-cropped in Jun 2026 to fix proportion issues.
-
 ---
 
 ## Phase Status
 
 | Phase | Status | Notes |
 |-------|--------|-------|
-| Phase 1 — Brand & Design System | 🟢 Complete | All files pushed to `version-2.0` branch |
-| Phase 2 — Services & Lead Generation | 🟡 In Progress | About page ✅ done. Contact form fix + services pages + enriched form still TODO. |
+| Phase 1 — Brand & Design System | 🟢 Complete | All files on version-2.0 branch |
+| Phase 2 — Services & Lead Generation | 🟡 In Progress | About ✅, Firebase backend ✅, Contact form TODO, Services pages TODO |
 | Phase 3 — Case Studies & Portfolio | 🔴 Not Started | |
 | Phase 4 — Insights Platform & SEO | 🔴 Not Started | |
 | Phase 5 — Client Portal v2 | 🔴 Not Started | |
@@ -89,22 +144,15 @@ Note: Vistra and Boa Vista logos were whitespace-cropped in Jun 2026 to fix prop
 
 ## Open Items / TODO
 
-| Priority | Item | Added |
-|----------|------|-------|
-| 🔴 CRITICAL | **Contact form dead endpoint** — posts to `/api/sendContactEmail`, never wired. ALL LEADS LOST. | Phase 1 |
-| 🔴 CRITICAL | **Firebase Functions not deployed** — IONOS SMTP + Nodemailer integration not built. | Phase 1 |
-| 🔴 HIGH | **Services sub-pages** — 4 pages: /services/post-merger-integration, /services/ai-readiness, /services/digital-transformation, /services/business-transformation | Phase 1 |
-| 🔴 HIGH | **Enriched lead form** — company size, timeline, challenge, how they found us, lead scoring | Phase 1 |
-| 🟡 MED | **GitHub Actions PAT needs `workflow` scope** — add at github.com/settings/tokens | Phase 1 |
-| 🟡 MED | **Firebase Hosting auto-deploy** — connect version-2.0 branch | Phase 1 |
-| 🟡 MED | **Calendly post-form** — show Calendly only on thank-you page after form submit | Phase 1 |
-| 🟢 LOW | **reCAPTCHA v2 → v3 upgrade** — invisible reCAPTCHA on contact form | Phase 1 |
-
-### ✅ Resolved Open Items
-| Item | Resolved | How |
-|------|----------|-----|
-| About page rewrite — company-first | ✅ Phase 2 Session 2 | Full rewrite committed to version-2.0 (commit 8f83c70) |
-| LinkedIn CDN photo in About.jsx | ✅ Phase 2 Session 2 | Changed to `/photos/rogerio-headshot.jpg` |
+| Priority | Item |
+|----------|------|
+| 🔴 HIGH | **Contact.jsx — 3-step form** — build the frontend form that posts to the Firebase Function. Must include all new fields: jobTitle, companyWebsite, industry, companySize, challenge, timeline, howFoundUs. 3-step flow for better conversion. |
+| 🔴 HIGH | **firebase.json rewrite fix** — currently routes `/api/sendContactEmail` to function. Must verify the rewrite matches the deployed function name exactly. |
+| 🔴 HIGH | **Services sub-pages** — 4 pages: /services/post-merger-integration, /services/ai-readiness, /services/digital-transformation, /services/business-transformation |
+| 🟡 MED | **GitHub Actions PAT `workflow` scope** — add at github.com/settings/tokens |
+| 🟡 MED | **Firebase Hosting auto-deploy** — connect version-2.0 branch |
+| 🟢 LOW | **reCAPTCHA v2 → v3 upgrade** — invisible reCAPTCHA on contact form |
+| 🟢 LOW | **Node.js 20 deprecation** — upgrade to Node.js 22 before Oct 2026 |
 
 ---
 
