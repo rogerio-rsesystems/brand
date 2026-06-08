@@ -238,3 +238,60 @@ Claude Code started on Rogerio's Windows machine. Phase 2 priorities:
 - /services/business-transformation
 
 Each page: hero, challenge/solution framing, sub-services checklist, case study teaser, FAQ, CTA to /contact
+
+---
+
+## Session 2 — Services Pages Complete + Competitor Analysis (June 8, 2026)
+
+### What was completed this session
+
+**Services Pages (Phase 2 — now fully complete)**
+- Built `/services` overview page — 5-card grid with gold hover, stats bar, CTA
+- Built 4 original service sub-pages: PMI, AI Readiness, Digital Transformation, Business Transformation
+- Added 5th service line: **Project Management** (PMO/Program/Portfolio/Project/Rescue/Coordination)
+- Expanded PMI sub-page significantly: Day-1/100 framework, 3 synergy types, cultural integration models (absorption/preservation/hybrid), carve-out & TSA section, accordion FAQ
+- Expanded AI Readiness sub-page: 4 real-world industry examples, 5-level AI Maturity Model, 2025/2026 stats
+- All 5 service sub-pages follow consistent structure: navy hero → challenge/solution → extra sections → checklist → case study → FAQ accordion → CTA
+- App.jsx routing updated for all 5 sub-pages
+
+**Logo Fix**
+- Identified `logo white.png` had solid white background box — wrong on navy backgrounds
+- Generated `logo-white-transparent.png` programmatically from `logo.png.png` (flipped black pixels to white, kept transparency)
+- Updated Navbar.jsx and Footer.jsx to use `logo-white-transparent.png`
+- Uploaded `logo-white-transparent.png` to brand repo
+
+**Security (completed previous session, documented here)**
+- reCAPTCHA v3 invisible (score 0.4 threshold)
+- Rate limiting: 5/IP/hour (Firestore-backed)
+- Firestore rules: full lockdown
+- HTTP security headers: CSP, HSTS, X-Frame-Options, Permissions-Policy
+- reCAPTCHA badge repositioned to bottom: 90px (above WhatsApp button)
+- All tested end-to-end: RGE-2026-0001 through RGE-2026-0003 confirmed working
+
+**Competitor & Partner Analysis**
+- Original report: 15 firms
+- Expanded report: 25 firms (v2)
+- Saved as `RGE_Competitor_Partner_Analysis_2026_v2.docx`
+- Key finding: E78 Partners (acquired GPMIP USA 2024) is fastest-escalating competitive threat
+- RG differentiated position confirmed: technology-enabled PMI + multilingual Latin America + boutique senior access
+
+### Phase 2 — COMPLETE ✅
+All Phase 2 deliverables are done:
+- About page (company-first rewrite) ✅
+- Firebase Function (Ionos SMTP, AI enrichment, lead scoring, Opportunity ID) ✅
+- Contact form (3-step, all fields, security, fully tested) ✅
+- Services overview + 5 sub-pages ✅
+- Security layer (4 layers deployed) ✅
+
+### What comes next — Phase 3: Case Studies & Portfolio
+- 3-4 anonymized case study pages
+- Portfolio v2 page
+- Each case study: industry tag, challenge, approach, outcome metrics
+- Routes: /portfolio, /portfolio/[slug]
+
+### Still pending (not urgent)
+- WhatsApp floating button review (v1.4 component needs v2.0 update)
+- Node.js 20 → 22 upgrade (before Oct 2026 deadline)
+- Firebase App Check enforcement (after go-live)
+- GitHub Actions workflow scope for CI/CD auto-deploy
+- Testimonials: replace 3 placeholders with real client quotes
