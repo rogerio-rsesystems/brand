@@ -404,3 +404,53 @@ Last updated: June 8, 2026
 - [ ] Testimonials — replace placeholders with real quotes
 - [ ] Firebase App Check enforcement — enable after go-live
 - [ ] GitHub Actions CI/CD workflow scope
+
+---
+
+## Session 4 Decisions & Fixes — June 9, 2026
+
+### Mobile Responsiveness ✅ Complete
+
+| Item | Detail |
+|------|--------|
+| **Approach** | Shared `useIsMobile()` hook at `src/hooks/useIsMobile.js` — watches window resize, returns boolean at 768px breakpoint |
+| **Scope** | 14 files updated: Home, About, Contact, Services, Portfolio, Insights, CaseStudyDetail, ArticleDetail, Footer, Navbar, all 5 service sub-pages |
+| **Grid rules** | 2-col → 1-col on mobile. 3-col → 1-col. 4-col → 2-col. Content+sidebar → stacked. |
+| **Padding** | Section padding reduced 80px → 48px on mobile. Form cards 40px → 16px. |
+| **Sticky sidebars** | Disabled on mobile — position switches to static |
+| **Contact page** | Hardcoded `1fr 340px` grid fixed to `isMobile ? '1fr' : '1fr 340px'`. Form stacks above sidebar on mobile. Confirmed working. |
+
+### Auth Pages Rebranded ✅
+
+| Page | Change |
+|------|--------|
+| `/login` — ClientLogin.jsx | Full rebrand: dark gray → Navy+Gold white card, RG logo at top, brand typography, gold links |
+| `/forgot-password` — ForgotPassword.jsx | Same rebrand treatment. Clean, consistent with public site. |
+| ClientSignup.jsx | Still old dark theme — deferred to Phase 7 (Client Portal rebuild) |
+
+### Insights Blog — Issues Fixed ✅
+
+| Issue | Fix |
+|-------|-----|
+| Firestore permissions error on publish | Firestore rules updated — articles writable by `admin@rgenterpriseconsulting.com` and `rogerio@rgenterpriseconsulting.com` directly via `request.auth.token.email` check. No `users_roles` doc required. |
+| "Loading articles" forever on public page | Removed composite index requirement — now fetches all articles and filters client-side |
+| Publish button saving as draft | Fixed setState race condition — status passed directly to `handleSave(status)` as parameter |
+| Markdown rendering | Added `marked.js` — full Markdown support: headings, bold, italic, lists, links, images, blockquotes, tables, code blocks |
+| Paste & auto-convert | Claude API converts any pasted text/HTML to clean Markdown in ~5 seconds |
+| First article published | DaimlerChrysler PMI case study live at /insights |
+
+### Updated Pre-Launch Checklist
+
+| Item | Status |
+|------|--------|
+| Phase 3: Portfolio & Case Studies | ✅ Complete |
+| Phase 3: Insights Blog (Firestore) | ✅ Complete |
+| Mobile responsiveness | ✅ Complete |
+| Login / Forgot Password rebrand | ✅ Complete |
+| Phase 4: Higgsfield visual production | 🔴 Pending |
+| ClientSignup rebrand | 🟡 Deferred to Phase 7 |
+| WhatsApp floating button v2.0 | 🟡 Pending pre-launch |
+| Node.js 20 → 22 upgrade | 🟡 Before Oct 2026 |
+| Firebase App Check enforcement | 🟡 Post go-live |
+| Testimonials — real quotes | 🟡 When available |
+| SEO meta tags & sitemap | 🟡 Phase 6 |
