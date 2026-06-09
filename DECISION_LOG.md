@@ -151,9 +151,10 @@ Last updated: June 8, 2026
 | Phase 1 — Brand & Design System | 🟢 Complete | Navbar, Footer, Home v3, About v2 (company-first), all logos, headshot, design tokens. |
 | Phase 2 — Services & Lead Generation | 🟢 Complete | About ✅, Firebase backend ✅, Contact form ✅, Security ✅, Services overview ✅, 5 service sub-pages ✅ |
 | Phase 3 — Case Studies & Portfolio | 🔴 Not Started | Next priority |
-| Phase 4 — Insights Platform & SEO | 🔴 Not Started | |
-| Phase 5 — Client Portal v2 | 🔴 Not Started | |
-| Phase 6 — Super-Admin CMS | 🔴 Not Started | |
+| Phase 4 — Visual Identity (Higgsfield AI) | 🔴 Not Started | Corporate imagery, hero animations, service section visuals |
+| Phase 5 — Insights Platform & SEO | 🔴 Not Started | Blog/articles, SEO meta tags, structured data |
+| Phase 6 — Client Portal v2 | 🔴 Not Started | Rebuild in-house |
+| Phase 7 — Super-Admin CMS | 🔴 Not Started | |
 
 ---
 
@@ -206,9 +207,10 @@ Last updated: June 8, 2026
 | Phase 1 — Brand & Design System | 🟢 Complete | Navbar, Footer, Home v3, About v2 (company-first), all logos fixed, headshot, design tokens. |
 | Phase 2 — Services & Lead Generation | 🟢 Complete | About ✅, Firebase backend ✅, Contact form (3-step) ✅, Security (reCAPTCHA/rate limiting/Firestore rules/HTTP headers) ✅, Services overview ✅, 5 service sub-pages ✅ |
 | Phase 3 — Case Studies & Portfolio | 🔴 Not Started | **Next priority** — 3-4 anonymized case study pages + Portfolio v2 |
-| Phase 4 — Insights Platform & SEO | 🔴 Not Started | Blog/articles section, SEO meta tags |
-| Phase 5 — Client Portal v2 | 🔴 Not Started | Rebuild in-house |
-| Phase 6 — Super-Admin CMS | 🔴 Not Started | |
+| Phase 4 — Visual Identity (Higgsfield AI) | 🔴 Not Started | Corporate imagery, hero animations, service section visuals — Higgsfield AI platform |
+| Phase 5 — Insights Platform & SEO | 🔴 Not Started | Blog/articles section, SEO meta tags, structured data |
+| Phase 6 — Client Portal v2 | 🔴 Not Started | Rebuild in-house |
+| Phase 7 — Super-Admin CMS | 🔴 Not Started | |
 
 ---
 
@@ -246,3 +248,94 @@ Last updated: June 8, 2026
 - `public/logo-white-transparent.png` — white transparent logo (dark navbar/footer)
 - `public/photos/rogerio-headshot.jpg` — professional headshot
 - `public/logos/*.png` — 9 Trusted By logos (Barton, UST, SmartTechlink, Vistra, Equifax, Datavant, Ciox, BoaVista, BizLatinHub)
+
+---
+
+## Phase 4 — Visual Identity & Higgsfield AI Production ✏️ Planned
+
+### Decision: Use Higgsfield AI for Corporate Visual Production
+
+| Date | Decision | Detail |
+|------|----------|--------|
+| Jun 2026 | **Platform: Higgsfield AI** | Selected for corporate animation and image generation. Higgsfield specializes in cinematic video generation, motion effects, and professional corporate imagery — appropriate for a boutique consulting brand. |
+| Jun 2026 | **Goal** | Elevate the site from professional text-heavy to visually compelling. Corporate imagery and subtle animations will differentiate RG from competitors whose sites are primarily text and stock photography. |
+| Jun 2026 | **Tone** | Executive. Cinematic. Navy + Gold color grading to match brand. No generic office stock. Think: boardrooms, data visualizations, integration war rooms, global deal maps. |
+| Jun 2026 | **Hero section priority** | The Hero slideshow is the highest-priority visual upgrade. Currently uses 4 Unsplash stock photos with navy overlay. Replace with Higgsfield-generated branded cinematic images or subtle looping animations. |
+| Jun 2026 | **Services sections priority** | Each service sub-page hero should have a bespoke visual — PMI should feel different from AI Readiness should feel different from Project Management. |
+
+### Higgsfield Setup Steps (Pre-Production Checklist)
+
+| Step | Action | Notes |
+|------|--------|-------|
+| 1 | **Create Higgsfield account** | https://higgsfield.ai — sign up with professional email |
+| 2 | **Select plan** | Review Pro vs. Studio tier — Studio recommended for commercial use and full resolution exports |
+| 3 | **Download brand kit** | From brand repo: `logo.png.png`, `logo-white-transparent.png`, Montserrat + Inter fonts, hex values: Navy `#1B2A4A`, Gold `#C8A84B` |
+| 4 | **Headshot prep** | Export Rogerio headshot at high resolution for any Higgsfield portrait animations |
+| 5 | **Prompt library** | Build a set of reusable prompt templates (see planned asset list below) before starting generation to ensure visual consistency |
+| 6 | **Color grading brief** | All outputs: cool dark tones, navy shadows, gold accent light sources. Avoid warm/orange tones. Cinematic widescreen (16:9). |
+| 7 | **Export format** | Video: MP4 (H.264), max 10 seconds for web. Images: PNG or WebP, minimum 1920×1080. |
+| 8 | **Asset naming** | Follow pattern: `hf-[section]-[variant]-[vN].mp4` e.g. `hf-hero-boardroom-v1.mp4`, `hf-services-pmi-v1.png` |
+
+### Planned Asset List
+
+#### Hero Section (Highest Priority)
+| Asset ID | Description | Format | Placement |
+|----------|-------------|--------|-----------|
+| `hf-hero-01` | Executive boardroom, dark navy atmosphere, subtle light movement | MP4 loop or PNG | Hero slide 1 |
+| `hf-hero-02` | Global deal map / network of connected nodes, gold accent lines | MP4 loop or PNG | Hero slide 2 |
+| `hf-hero-03` | Data transformation visualization — fragmented data becoming unified | MP4 loop or PNG | Hero slide 3 |
+| `hf-hero-04` | Corporate handshake / deal close moment, cinematic framing | PNG | Hero slide 4 |
+
+#### Services Sub-Pages (Each page gets a unique hero visual)
+| Asset ID | Service | Description | Format |
+|----------|---------|-------------|--------|
+| `hf-svc-pmi` | Post-Merger Integration | Two org charts merging into one, Day 1 countdown board | PNG or MP4 |
+| `hf-svc-ai` | AI Readiness | Data silos breaking apart and flowing into a unified stream | PNG or MP4 |
+| `hf-svc-digital` | Digital Transformation | Legacy stack dissolving into cloud architecture | PNG or MP4 |
+| `hf-svc-bizxform` | Business Transformation | Strategy pyramid being built, executive team in silhouette | PNG |
+| `hf-svc-pm` | Project Management | Gantt chart / program dashboard, controlled execution energy | PNG |
+
+#### About Page
+| Asset ID | Description | Format | Placement |
+|----------|-------------|--------|-----------|
+| `hf-about-01` | Rogerio headshot animated — subtle professional motion effect | MP4 | About hero panel |
+| `hf-about-02` | Global map with Latin America + North America highlighted in gold | PNG | About geography section |
+
+#### General / Reusable
+| Asset ID | Description | Format | Placement |
+|----------|-------------|--------|-----------|
+| `hf-og-default` | Default Open Graph image — navy bg, gold logo, tagline | PNG 1200×630 | og:image meta tag |
+| `hf-og-services` | Services OG image | PNG 1200×630 | Services page og:image |
+| `hf-og-contact` | Contact page OG image | PNG 1200×630 | Contact page og:image |
+
+### Implementation Notes for Claude (when Phase 4 begins)
+
+- All Higgsfield assets stored in `/public/media/` folder in the website repo
+- Hero slideshow in `Home.jsx` currently uses `backgroundImage: url(...)` inline CSS — update to reference `/media/hf-hero-*.png` or convert to `<video autoPlay muted loop playsInline>` for MP4 animations
+- Service sub-page heroes currently use CSS `background: #1B2A4A` — update to use `hf-svc-*` assets as background images with the existing navy overlay preserved (opacity ~0.7 so text remains legible)
+- About.jsx headshot section: if using animated headshot, swap `<img>` for `<video autoPlay muted loop playsInline>` with poster fallback to static headshot
+- OG images: update `<meta property="og:image">` in each page's `<Helmet>` block
+- Performance: all video assets must be compressed to under 5MB for web. Images: use WebP format with PNG fallback.
+- Lazy loading: service sub-page hero images should use `loading="lazy"` to not block initial page render
+
+### Phase 4 Exit Criteria (Definition of Done)
+
+- [ ] Higgsfield account created and plan selected
+- [ ] All hero assets (hf-hero-01 through 04) generated, approved, and committed
+- [ ] All 5 service page visuals generated and deployed
+- [ ] About page animated headshot or geography visual in place
+- [ ] 3 OG images generated (default, services, contact)
+- [ ] All assets compressed, WebP-converted, and committed to `/public/media/`
+- [ ] Mobile performance verified — no layout shift, no loading delay
+- [ ] Rogerio final visual approval before Phase 5
+
+---
+
+## Known Issues — Logged June 9, 2026
+
+| # | Issue | Priority | Phase |
+|---|-------|----------|-------|
+| 1 | **Mobile responsiveness broken** | 🔴 HIGH | Pre-launch — fix before go-live. All pages need mobile CSS review. Grid layouts collapse incorrectly on narrow viewports (<768px). Affects all pages built in Phase 2 and 3. |
+| 2 | **Client portal dark theme** | 🟡 MED | Phase 6 (Client Portal rebuild). Login page, ClientDashboard, ClientProjects, DocumentPortal all use old dark gray Tailwind theme from v1.4. Rebuild to Navy+Gold brand system when portal is rebuilt in Phase 6. |
+| 3 | **Admin portal dark theme** | 🟡 MED | Phase 6. AdminDashboard and AdminProjects use old dark Tailwind theme. AdminInsights was built new (Navy+Gold). Standardize all admin pages to match AdminInsights style when portal is rebuilt. |
+| 4 | **Firestore articles permissions** | 🔴 FIXED | Firestore rules required `users_roles` admin document before allowing article writes. Fixed June 9 — rule now also checks `request.auth.token.email` directly for admin emails. Deploy with `firebase deploy --only firestore:rules`. |
