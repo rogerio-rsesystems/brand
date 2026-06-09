@@ -454,3 +454,27 @@ Last updated: June 8, 2026
 | Firebase App Check enforcement | 🟡 Post go-live |
 | Testimonials — real quotes | 🟡 When available |
 | SEO meta tags & sitemap | 🟡 Phase 6 |
+
+---
+
+## Careers Feature ✅ Built — June 2026
+
+| Decision | Detail |
+|----------|--------|
+| **Platform** | Built on same Firebase stack — Firestore for positions/applications, Storage for resumes, Functions for email |
+| **Admin write** | /admin/careers — post/edit/close positions with full Markdown JD. Same pattern as Insights admin. |
+| **Public listing** | /careers — open positions card list. Empty state with direct email CTA. |
+| **Job detail page** | /careers/[slug] — Markdown JD rendered, LinkedIn Share in hero, sticky application form |
+| **Application form** | Name, email, phone, LinkedIn URL, resume upload (PDF/Word max 5MB), optional cover note |
+| **Resume storage** | Firebase Storage — resumes/ folder. Download URL stored in Firestore applications collection. |
+| **Notification email** | Sent to talent@rgenterpriseconsulting.com with all candidate details + gold Download Resume button |
+| **Auto-reply** | Sent to candidate with reference number (RGE-APP-XXXXXX) and confirmation |
+| **Firebase Function** | sendApplicationEmail — deployed alongside sendContactEmail in functions/index.js |
+| **Firestore rules** | positions: open ones public-readable, admin-writable. applications: anyone can create (submit), admin-readable only. |
+| **Navigation** | Careers added to both navbar and footer |
+| **LinkedIn workflow** | Each job page has LinkedIn Share button. URL posted on LinkedIn auto-pulls og:title and og:description from meta tags. |
+| **Reference number format** | RGE-APP-XXXXXX (6-digit timestamp suffix) |
+| **Talent email** | talent@rgenterpriseconsulting.com — must be created as Ionos mailbox before go-live |
+
+### Pre-Launch: Create Talent Email
+Before going live, create `talent@rgenterpriseconsulting.com` as an Ionos mailbox. Same process as `leads@rgenterpriseconsulting.com`. Otherwise application notifications will bounce.
