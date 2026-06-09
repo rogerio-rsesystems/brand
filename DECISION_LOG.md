@@ -339,3 +339,68 @@ Last updated: June 8, 2026
 | 2 | **Client portal dark theme** | 🟡 MED | Phase 6 (Client Portal rebuild). Login page, ClientDashboard, ClientProjects, DocumentPortal all use old dark gray Tailwind theme from v1.4. Rebuild to Navy+Gold brand system when portal is rebuilt in Phase 6. |
 | 3 | **Admin portal dark theme** | 🟡 MED | Phase 6. AdminDashboard and AdminProjects use old dark Tailwind theme. AdminInsights was built new (Navy+Gold). Standardize all admin pages to match AdminInsights style when portal is rebuilt. |
 | 4 | **Firestore articles permissions** | 🔴 FIXED | Firestore rules required `users_roles` admin document before allowing article writes. Fixed June 9 — rule now also checks `request.auth.token.email` directly for admin emails. Deploy with `firebase deploy --only firestore:rules`. |
+
+---
+
+## Phase 3 — Complete ✅ June 9, 2026
+
+### Case Studies / Portfolio
+
+| Decision | Detail |
+|----------|--------|
+| **Anonymized case studies** | No client names. Described by industry + size + geography only. All metrics are factual RGE outcomes. Standard boutique consulting practice. |
+| **4 case study pages** | /portfolio/post-merger-integration-latam, /portfolio/ai-automation-fintech, /portfolio/digital-transformation-saas, /portfolio/business-transformation-fintech |
+| **Portfolio overview** | /portfolio — card grid with confidentiality disclaimer bar. Each card shows tag, anonymized client, headline, 4 metrics, "Read full case study" link. |
+| **Case study structure** | Hero + meta strip (client/geography/duration/service) → outcomes stats bar → challenge → numbered approach steps → sidebar (technologies, related services, CTA, confidentiality note) → related case studies |
+| **Home page teasers** | Updated to link directly to individual case study pages (not just /portfolio) |
+
+### Insights / Blog
+
+| Decision | Detail |
+|----------|--------|
+| **Firestore-backed blog** | Articles stored in `articles` Firestore collection. No code push needed to publish. |
+| **Admin write/publish** | /admin/insights — write title, slug (auto-generated), category, excerpt, body, author, references. Save as Draft or Publish instantly. |
+| **Markdown support** | Full Markdown rendering via marked.js — headings, bold, italic, lists, links, images (by URL), blockquotes (gold left border), tables, code blocks. |
+| **Paste & auto-convert** | Gold "✨ Paste & auto-convert" button in admin. Paste any raw text/HTML from any source. Claude API cleans and converts to Markdown in ~5 seconds. Ctrl+C Ctrl+V workflow. |
+| **Article structure** | Hero → rendered Markdown body → references → LinkedIn share button. Sticky sidebar: CTA, related articles, About RGE. |
+| **Firestore rules** | Published articles readable by everyone. Writes allowed for authenticated admin emails (rogerio@ and admin@rgenterpriseconsulting.com). Self-bootstrap on first login. |
+| **LinkedIn share** | Every article has a LinkedIn share button. /insights page has Follow on LinkedIn CTA. |
+| **Article publishing confirmed** | admin@rgenterpriseconsulting.com confirmed working. DaimlerChrysler article published and visible. |
+
+### Phase 3 Status
+
+| Item | Status |
+|------|--------|
+| Portfolio overview page (/portfolio) | ✅ Complete |
+| 4 case study detail pages | ✅ Complete |
+| Home page teasers linked to pages | ✅ Complete |
+| Insights overview page (/insights) | ✅ Complete |
+| Article detail page (/insights/[slug]) | ✅ Complete |
+| Admin write/publish interface | ✅ Complete |
+| Markdown rendering | ✅ Complete |
+| Paste & auto-convert (AI) | ✅ Complete |
+| Firebase rules deployed | ✅ Complete |
+
+---
+
+## Updated Project Phase Roadmap — June 9, 2026
+
+| Phase | Name | Status |
+|-------|------|--------|
+| Phase 1 | Brand & Design System | ✅ Complete |
+| Phase 2 | Services & Lead Generation | ✅ Complete |
+| Phase 3 | Case Studies, Portfolio & Insights Blog | ✅ Complete |
+| Phase 4 | Visual Identity — Higgsfield AI | 🔴 Not Started |
+| Phase 5 | Mobile Responsiveness | 🔴 Not Started — HIGH priority pre-launch |
+| Phase 6 | Insights Platform & SEO | 🟡 Partial — blog built, SEO meta tags pending |
+| Phase 7 | Client Portal v2 | 🔴 Not Started |
+| Phase 8 | Super-Admin CMS | 🔴 Not Started |
+
+### Pre-Launch Checklist (before firebase deploy --only hosting)
+- [ ] Phase 4: Higgsfield visual production
+- [ ] Phase 5: Mobile responsiveness fix — all pages
+- [ ] WhatsApp floating button review (v1.4 → v2.0)
+- [ ] Node.js 20 → 22 upgrade (before Oct 2026)
+- [ ] Testimonials — replace placeholders with real quotes
+- [ ] Firebase App Check enforcement — enable after go-live
+- [ ] GitHub Actions CI/CD workflow scope

@@ -295,3 +295,42 @@ All Phase 2 deliverables are done:
 - Firebase App Check enforcement (after go-live)
 - GitHub Actions workflow scope for CI/CD auto-deploy
 - Testimonials: replace 3 placeholders with real client quotes
+
+---
+
+## Session 3 — Phase 3 Complete (June 9, 2026)
+
+### What was completed
+
+**Portfolio / Case Studies**
+- Rewrote Portfolio.jsx — card grid, confidentiality disclaimer, 4 anonymized case studies
+- Built CaseStudyDetail.jsx — reusable template, all 4 cases, outcomes strip, numbered approach, sidebar
+- Added all 4 case studies + 3 seed insights articles to theme.js as data
+- Updated Home.jsx teasers to link to individual case study pages
+
+**Insights Blog — Firestore-backed**
+- Rebuilt Insights.jsx to read from Firestore `articles` collection (no code push to publish)
+- Rebuilt ArticleDetail.jsx with full Markdown rendering via marked.js
+- Built AdminInsights.jsx — write/edit/publish/draft/delete articles from admin panel
+- Added Markdown cheat sheet inline in admin form
+- Added "✨ Paste & auto-convert" — paste any text, Claude API converts to clean Markdown
+- Fixed Firestore rules — articles writable by admin emails without needing users_roles doc
+- Deployed rules, confirmed publishing works with admin@rgenterpriseconsulting.com
+- First real article published: DaimlerChrysler PMI case study
+
+**Markdown features supported**
+- ## headings (navy, Montserrat), **bold**, *italic*, - lists, 1. numbered lists
+- [links](url) open in new tab, ![image](url) full-width with caption
+- > blockquotes render as gold left-border callouts
+- Tables, inline code, code blocks, --- horizontal rules
+
+### Known issues logged (not blocking)
+1. Mobile responsiveness — all Phase 2/3 pages broken on narrow viewports
+2. Client portal dark theme — Phase 7 (rebuild)
+3. Admin portal dark theme — Phase 7 (rebuild)
+4. WhatsApp floating button — needs v2.0 update before launch
+
+### What comes next
+- Phase 4: Higgsfield AI visual production (hero animations, service page visuals)
+- Phase 5: Mobile responsiveness — full pass across all pages (HIGH priority pre-launch)
+- Rogerio to add more Insights articles via admin panel (no dev needed)
