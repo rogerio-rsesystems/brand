@@ -478,3 +478,36 @@ Last updated: June 8, 2026
 
 ### Pre-Launch: Create Talent Email
 Before going live, create `talent@rgenterpriseconsulting.com` as an Ionos mailbox. Same process as `leads@rgenterpriseconsulting.com`. Otherwise application notifications will bounce.
+
+---
+
+## Careers Feature — Issues Fixed & Final State (June 2026)
+
+| Issue | Root Cause | Fix |
+|-------|-----------|-----|
+| Careers page blank | Route `/careers` was imported but never added to App.jsx Routes | Added public routes `/careers` and `/careers/:slug` |
+| Login page hanging | `setLoading(false)` ran after successful login but `useEffect` navigated away first — button stayed disabled forever | `setLoading(false)` now only runs on error, not on success |
+| Resume upload CORS error | Firebase Storage bucket didn't exist yet, then CORS rules weren't set | Created Storage bucket in Firebase Console, ran `gcloud storage buckets update` with cors.json |
+| Resume upload permission denied | No `storage.rules` file existed — Firebase defaulted to deny all | Created storage.rules allowing public PDF/Word uploads under 5MB to resumes/ folder |
+| Sign Out missing from admin | No logout button existed in AdminDashboard | Added red Sign Out button — logs out and redirects to /login |
+| CSP blocking Firestore | index.html CSP missing `firebasestorage.googleapis.com`, `securetoken.googleapis.com`, `*.firestore.googleapis.com` | Updated CSP in index.html to include all required Firebase domains |
+
+### Security Rules — Final State
+
+| Surface | Rule |
+|---------|------|
+| Storage resumes/ | Public create: PDF/Word only, max 5MB, no overwrites. Read/delete: authenticated only. |
+| Firestore applications | Public create with field validation (must have fullName, email, positionId, size limits). Read: admin only. |
+| Firestore articles | Published status readable publicly. Drafts: admin only. |
+| Firestore positions | Public read (for listing). Write: admin only. |
+| Firestore leads/meta | Completely locked — Firebase Functions only. |
+| Everything else | Default deny. |
+
+### Careers Feature — Confirmed Working
+- Admin posts position at /admin/careers → appears in Firestore `positions` collection
+- Public sees position at /careers → clicks → /careers/[slug] with full JD
+- Applicant fills form, uploads PDF resume → Firebase Storage `resumes/` folder
+- Application saved to Firestore `applications` collection
+- Email notification sent to talent@rgenterpriseconsulting.com with download link
+- Auto-reply sent to applicant with reference number
+- LinkedIn Share button on each job page
