@@ -511,3 +511,167 @@ Before going live, create `talent@rgenterpriseconsulting.com` as an Ionos mailbo
 - Email notification sent to talent@rgenterpriseconsulting.com with download link
 - Auto-reply sent to applicant with reference number
 - LinkedIn Share button on each job page
+
+---
+
+## Phase 4 — Visual Identity & Site Beautification (June 2026)
+
+### Hero Redesign — Approved & Implemented
+
+| Decision | Detail |
+|----------|--------|
+| **Headshot removed from homepage** | Headshot completely removed from hero — firm-first brand |
+| **Hero background** | Animated canvas: gold circuit grid lines + travelling signal pulses. Nodes pulse at grid intersections. Rotating dashed rings orbit the logo center. |
+| **Hero logo** | `logo-white-transparent.png` — 442px, opacity 15%, CSS filter `invert(1) sepia(1) saturate(0)` = pure white ghost. Gentle float animation (4s sine wave). |
+| **Logo direction rejected** | Wireframe/outline SVG rejected — `FinalCorrigido.svg` confirmed as raster PNG embedded in SVG shell (no vector paths). True outline not technically possible without original .ai/.eps file. |
+| **Logo watermark rationale** | Logo is decorative support element, not competing with headline. Left side (text) is the primary message. |
+| **Glow/rings** | Canvas draws 3 pulsing gold rings + 2 rotating dashed rings around logo center — animated energy without altering the logo itself |
+| **How We Work section** | 3 Unsplash photos at full visibility below fold (between Trusted By and Services). M&A Integration / AI & Digital / Transformation. Gold tag badges. Approved. |
+| **"Senior Practitioners" text** | Corrected — removed false claim about senior-only staffing. New copy: "Every RGE engagement is staffed with experienced professionals committed to delivery. We don't just advise — we execute alongside your team and own the outcomes." |
+| **Track Record section** | Removed from About page — too personally focused on Rogerio, not firm-first |
+
+### Inner Page Heroes — Each Unique
+
+| Page | Visual Treatment | Headline |
+|------|-----------------|----------|
+| Services | Interconnected node graph SVG (background, 6% opacity) | "Enterprise Services. Built to Execute." |
+| About | Globe/longitude lines SVG watermark — communicates global reach | "The Firm Behind Every Program We Lead." |
+| Portfolio | Rising bar chart elements (bottom-right, 8% opacity) | "Real Programs. Measurable Outcomes." |
+| Insights | Horizontal editorial rule lines (4% opacity) | "Perspectives From Practitioners Who Lead." |
+| Careers | Globe arc with dashed flight path + city dots | "Work on Programs That Actually Matter." |
+| Contact | Diagonal gold accent lines (right side, 6% opacity) | "Your Toughest Challenge Deserves a Real Answer." |
+
+All heroes: navy `#1B2A4A`, gold `#C8A84B`, Montserrat 800 headlines, consistent eyebrow pattern.
+
+### Contact Page — Full Conversion Redesign
+
+| Element | Decision |
+|---------|----------|
+| **Hero layout** | Split — headline + 3 trust badges left, proof strip ($30M+/15yr/3 continents/24h) right |
+| **Trust badges** | ⚡ 24h response guarantee · 🔒 Strictly confidential · 🤝 No pitch — just a conversation |
+| **Photo strip** | Same 3 Unsplash cards as homepage How We Work section — replaces redundant dark text strip |
+| **Step micro-copy** | Reassuring one-liner under each step title explaining why we ask |
+| **Sidebar** | "What Happens Next" upgraded: numbered circles with gold borders + subtitle per step |
+| **Calendly strategy** | Calendly LOCKED behind form submission — zero Calendly links visible anywhere on site before form is filled |
+| **Calendly CTA** | Appears ONLY on thank-you screen after submission + in confirmation email to submitter |
+| **Navbar CTA** | "Schedule a Call" → points to /contact (not Calendly directly) |
+| **About page CTA** | Points to /contact |
+| **Rationale** | Forces every prospect to submit form first — Rogerio enters every Calendly call fully briefed |
+
+### Careers Page Improvements
+
+| Change | Detail |
+|--------|--------|
+| Hero globe arc | SVG globe with dashed flight path arc — communicates cross-border work |
+| Icon upgrade | Emoji icons in "Why RGE" cards replaced with proper inline SVG icons |
+| Hero copy | "Work on Programs That Actually Matter." |
+
+---
+
+## Lead Intelligence System — Phase 4 (June 2026)
+
+### Architecture
+
+| Component | Location | Editable Without Code |
+|-----------|----------|----------------------|
+| Numeric scoring weights | `functions/index.js` `scoreLead()` | ❌ Requires code edit |
+| Free email domain list | `functions/index.js` `FREE_EMAIL_DOMAINS[]` | ❌ Requires code edit |
+| High-risk country list | `functions/index.js` `HIGH_RISK_COUNTRIES[]` | ❌ Requires code edit |
+| AI analysis prompt | Firestore `config/leadIntelligencePrompt` | ✅ Admin UI at /admin/prompt |
+
+### Lead Scoring — Quantitative (scoreLead function)
+
+| Signal | Points |
+|--------|--------|
+| Budget $150K+ | +25 |
+| Budget $75K-$150K | +20 |
+| Budget $25K-$75K | +12 |
+| Budget Under $25K | +5 |
+| Timeline ASAP | +25 |
+| Timeline 1-3 months | +20 |
+| Timeline 3-6 months | +12 |
+| Timeline Just exploring | +5 |
+| Company 1000+ employees | +20 |
+| Company 201-1000 | +16 |
+| Company 51-200 | +10 |
+| Company 1-50 | +5 |
+| CEO/President/Owner | +15 |
+| COO/CTO/CFO | +14 |
+| VP/Vice President | +12 |
+| Director | +10 |
+| Manager/Head of | +7 |
+| Analyst/Associate | +3 |
+| Company website provided | +10 |
+| Phone number provided | +5 |
+| Free email (gmail etc.) | −10 |
+| High-risk country origin | −20 |
+| VPN/Proxy detected | −15 |
+
+Score labels: 🔥 HOT (75+) · ⚡ WARM (50+) · ❄️ COLD (25+) · 👀 UNSCORED
+
+### IP Intelligence (ip-api.com)
+- Country name + country code on every submission
+- ISP/network provider identified
+- Proxy/VPN detection
+- High-risk country flag (27 countries listed in code)
+- Local/dev IPs automatically skipped
+
+### Free Email Detection
+Domains flagged: gmail.com, yahoo.com, hotmail.com, outlook.com, live.com, aol.com, icloud.com, me.com, msn.com, ymail.com, protonmail.com, mail.com, zoho.com, gmx.com, inbox.com
+
+### AI Intelligence — Claude Analysis (qualitative)
+Claude analyzes every submission across 5 dimensions and returns structured JSON:
+1. **Email domain** — corporate vs free, domain-to-company match
+2. **Job title** — seniority, economic buyer vs influencer vs researcher
+3. **Geographic risk** — country, proxy/VPN, high-risk flag with explicit warning
+4. **Content** — free-text fields analyzed for authenticity, coherence, specificity
+5. **Company** — known context, legitimacy check, size/industry match
+
+Output fields: `credibilityScore` (0-100), `credibilityRating`, `emailAnalysis`, `titleAnalysis`, `geoRiskAnalysis`, `contentAnalysis`, `companyAnalysis`, `redFlags[]`, `greenFlags[]`, `recommendedAction`, `actionRationale`, `openingTalkingPoint`
+
+Recommended actions: `CALL_TODAY` / `FOLLOW_UP_48H` / `NURTURE` / `DO_NOT_ENGAGE`
+
+### Admin Prompt Editor — /admin/prompt
+- Full textarea UI to edit the Claude prompt live
+- 20 `{{variables}}` available (all form fields + IP data)
+- Changes saved to Firestore `config/leadIntelligencePrompt`
+- Firebase Function reads from Firestore on every submission
+- Falls back to hardcoded default if Firestore unavailable
+- Save/Reset to Default / last-saved timestamp shown
+- Variable reference panel: click to insert at cursor
+
+### reCAPTCHA Fixes
+- Localhost bypass: requests from localhost skip reCAPTCHA entirely (always scores low in dev)
+- Production threshold lowered 0.4 → 0.3 (still blocks bots at 0.1-0.2)
+- Logic bug fixed: inverted if/else was blocking localhost instead of skipping it
+
+### Contact Form Bug Fixes
+- **Auto-submit bug**: `<form onSubmit>` replaced with plain `<div>` — Submit button is `type="button"` with `onClick`. Physically impossible to auto-submit now.
+- **Step guard**: `handleSubmit` previously had no check for current step — could fire on Enter key from any step. Now only callable via explicit button click.
+
+---
+
+## Pre-Launch Checklist — Updated June 2026
+
+| Item | Status | Notes |
+|------|--------|-------|
+| Phase 3: Portfolio & Case Studies | ✅ Complete | |
+| Phase 3: Insights Blog (Firestore) | ✅ Complete | |
+| Phase 3: Careers feature | ✅ Complete | talent@rgenterpriseconsulting.com confirmed created |
+| Phase 4: Hero redesign | ✅ Complete | Animated canvas, white ghost logo, no headshot |
+| Phase 4: Inner page heroes | ✅ Complete | 6 unique visual treatments |
+| Phase 4: Contact page redesign | ✅ Complete | Conversion-focused, Calendly gated behind form |
+| Phase 4: Lead intelligence | ✅ Complete | IP + email + AI analysis, admin prompt editor |
+| Mobile responsiveness | ✅ Complete | All pages |
+| Login / Forgot Password rebrand | ✅ Complete | |
+| About page Track Record | ✅ Removed | |
+| Senior Practitioners copy | ✅ Fixed | |
+| talent@ Ionos mailbox | ✅ Confirmed created | |
+| PPT template + Word letterhead | 🟡 Post-launch | Rogerio requested — deferred |
+| Higgsfield service page visuals | 🟡 Non-blocking | OG images + service page heroes |
+| WhatsApp button v2.0 | 🟡 Pre-launch | |
+| Node.js 20 → 22 upgrade | 🟡 Before Oct 2026 | |
+| Firebase App Check | 🟡 Post go-live | |
+| SEO meta tags & sitemap | 🟡 Phase 5 | |
+| ClientSignup rebrand | 🔴 Phase 7 | |
+| `firebase deploy --only hosting` | 🔴 DO NOT RUN | Until Rogerio approves go-live |

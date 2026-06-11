@@ -334,3 +334,66 @@ All Phase 2 deliverables are done:
 - Phase 4: Higgsfield AI visual production (hero animations, service page visuals)
 - Phase 5: Mobile responsiveness — full pass across all pages (HIGH priority pre-launch)
 - Rogerio to add more Insights articles via admin panel (no dev needed)
+
+---
+
+## Session 5 — Phase 4 Visual Identity + Lead Intelligence (June 2026)
+
+### Participants
+Rogerio Laureano Gomes + Claude
+
+### What Was Built
+
+**Hero Redesign**
+- Removed headshot from homepage hero entirely — firm-first decision locked
+- Animated canvas background: gold circuit grid, travelling signal pulses, pulsing nodes
+- Real logo (`logo-white-transparent.png`) — 442px, 15% opacity, white ghost filter, float animation
+- Rotating gold dashed rings orbit logo center via canvas
+- Logo direction explored: FinalCorrigido.svg confirmed as raster-in-SVG (no vector paths) — true outline not possible
+- White ghost (CSS filter) approved as final direction
+
+**Inner Page Heroes — all 6 public pages rebuilt**
+- Services, About, Portfolio, Insights, Careers, Contact — each unique visual
+- All share: navy #1B2A4A, gold #C8A84B, Montserrat 800, eyebrow pattern
+
+**Contact Page — Full Conversion Redesign**
+- New hero: split layout with proof strip + trust badges
+- Calendly completely locked behind form — only appears on thank-you screen
+- Photo cards strip replaces redundant dark text strip
+- Step micro-copy added to each form step
+- Sidebar "What Happens Next" upgraded with gold numbered circles + subtitles
+
+**Lead Intelligence System — full rebuild**
+- IP geolocation via ip-api.com (country, ISP, proxy/VPN detection)
+- Free email domain detection (-10 pts)
+- High-risk country list (-20 pts), proxy/VPN (-15 pts)
+- Claude AI analyzes all 5 dimensions: email, title, geo, content, company
+- Structured JSON output: credibilityScore, rating, flags, action, talking point
+- Rich email report with color-coded panels
+
+**Admin Prompt Editor (/admin/prompt)**
+- Full textarea UI — edit Claude prompt without coding
+- Saved to Firestore config/leadIntelligencePrompt
+- 20 {{variables}} with click-to-insert reference panel
+- Firebase Function reads Firestore on every submission
+- Reset to Default safety net
+
+**Bug Fixes**
+- Contact form auto-submit: `<form>` replaced with `<div>`, submit is onClick only
+- reCAPTCHA localhost bypass + inverted logic fix
+- About page Track Record section removed
+- "Senior Practitioners" copy corrected — no false staffing claims
+
+### Decisions Locked
+1. No headshot anywhere on homepage — ever
+2. No Calendly link visible before form submission — anywhere on site
+3. Logo identity preserved — no redesign, animation wraps around real logo
+4. Prompt editor in admin — Rogerio owns prompt changes going forward
+5. talent@rgenterpriseconsulting.com confirmed created — Careers email active
+
+### What Comes Next (Phase 5)
+- SEO: meta tags, sitemap, robots.txt, OG images for all pages
+- Higgsfield service visuals (non-blocking for launch)
+- WhatsApp button v2.0
+- Node.js 20 → 22 upgrade (before Oct 2026 deadline)
+- Go-live approval from Rogerio → `firebase deploy --only hosting`
