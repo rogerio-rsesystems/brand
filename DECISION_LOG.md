@@ -807,3 +807,53 @@ Overall rating: B+ — Strong foundation, 3 gaps fixed
 | — | Higgsfield service visuals | 🟡 Non-blocking |
 | — | Node.js 20 → 22 | 🟡 Before Oct 2026 |
 | — | SEO summary in BRD | 🟡 Next session |
+
+---
+
+## Careers Form — Bug Fix Session (June 12, 2026)
+
+### Context
+After go-live, a bot submitted the careers form overnight producing an email with all fields showing "undefined." This triggered a security hardening effort that introduced multiple new bugs into the careers and contact form pipeline.
+
+### Root Cause Chain — Three Stacked Bugs
+
+| Order | Bug | Symptom | How Long It Blocked Us |
+|-------|-----|---------|------------------------|
+| 1 | `sanitize()` was applied to the Firebase Storage resume URL, stripping special characters and breaking the URL. Domain validation then rejected it. | 400 error on every careers submission | ~1 hour |
+| 2 | `refNum` was left in the required fields validation check after the architecture changed to server-side ID generation. Frontend no longer sends `refNum` so every request failed validation. | 400 error on every careers submission | ~1 hour |
+| 3 | Rate limit check used `if (rateLimited)` — JavaScript objects are always truthy. Should have been `if (!rateLimited.allowed)`. Every submission was blocked with 429 regardless of actual count. | 429 error on every submission — both contact AND careers forms | ~2 hours |
+
+Bug 3 was present from the very beginning but was masked by bugs 1 and 2 failing first. Once those were fixed, bug 3 became the blocker.
+
+### Impact
+- Careers form non-functional on production for approximately 4 hours post-launch
+- Contact form rate limiting also broken (same bug 3) — was blocking all submissions
+- Multiple unnecessary deploys during diagnosis
+- Both forms now fully working
+
+### Fixes Applied
+- Resume URL: taken from `raw.resumeUrl` directly, not passed through `sanitize()`
+- Required fields: `refNum` removed from validation — server generates it now
+- Rate limit: `if (rateLimited)` → `if (!rateLimited.allowed)` — fixed in both functions
+
+### Architecture Decision — Application Reference Number
+**Before:** `RGE-APP-476196` — generated client-side with `Date.now().slice(-6)`, random, not stored in Firestore
+**After:** `RGE-APP-2026-0001` — generated server-side using atomic Firestore counter at `meta/appCounter`, stored as `refNum` field in every application document, returned to frontend, shown on confirmation screen, included in both notification and auto-reply emails
+
+Same counter pattern as leads (`meta/leadCounter`). Resets annually. Sequential within each year.
+
+### Lessons Learned
+1. Never sanitize URLs — use domain validation only on the raw value
+2. When changing architecture (client → server ID generation), audit ALL validation checks that reference the changed field
+3. Always test rate limit logic returns with `.allowed` property check, not object truthiness
+4. Rate limit bugs are hard to spot during development because they only manifest under repeated testing
+5. Security hardening changes should be tested end-to-end before deploying — each new validation is a potential new failure point
+
+### Post-Fix Status
+- ✅ Careers form submits correctly on production
+- ✅ Sequential `RGE-APP-YYYY-NNNN` ID generated server-side
+- ✅ `refNum` stored in Firestore `applications` collection
+- ✅ Notification email sent to talent@rgenterpriseconsulting.com with Download Resume
+- ✅ Auto-reply sent to applicant with reference number
+- ✅ Contact form rate limiting also fixed (same bug)
+- ✅ Bot protection: CORS locked, field validation, rate limiting, resume URL domain check

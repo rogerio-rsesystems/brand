@@ -449,3 +449,36 @@ Rogerio Laureano Gomes + Claude
 - Phase 6: Client Portal v2 redesign
 - Phase 7: Firebase App Check + Super-Admin CMS
 - Next session: SEO summary in BRD + review GA4 data
+
+---
+
+## Session 7 — Careers Form Bug Fix + Security Hardening (June 12, 2026)
+
+### What Triggered This Session
+Overnight bot submission to careers form produced email with all fields "undefined." Triggered security hardening that introduced new bugs.
+
+### Changes Made
+- sendApplicationEmail CORS locked to domain (was origin:*)
+- Input sanitization on all 11 careers form fields
+- Resume URL domain validation (Firebase Storage only)
+- Rate limiting 3/IP/hour on careers (separate from contact 5/IP/hour)
+- Atomic server-side application ID: RGE-APP-YYYY-NNNN
+- refNum stored as top-level Firestore field
+- Fixed rate limit bug affecting BOTH contact and careers (object truthiness check)
+- Storage rules: resumes readable publicly (needed for unauthenticated download URL)
+- Version strip in footer: v2.1.0 · 2026-06-12
+- Careers form validation: name garbage detection, email format check
+
+### Decisions Locked
+1. PPT/Word templates — OUT OF SCOPE for this project permanently. Separate project.
+2. Application ID format: RGE-APP-YYYY-NNNN (server-generated, atomic, sequential)
+3. Platform Config Panel — to be built in Phase 6 admin session. Will cover: rate limits, scoring weights, high-risk country list, notification emails, free email domain list
+4. Admin area to include: Leads viewer, Applications viewer, Config panel, upgraded Dashboard
+5. Rate limit counters visible and resettable from Firebase Console (meta collection)
+
+### What Comes Next (Phase 6)
+- Admin area: Leads viewer + Applications viewer
+- Platform Config panel (rate limits, scoring, countries, emails all configurable)
+- Upgraded admin dashboard with live stats
+- Firebase App Check
+- Node.js 20→22 upgrade (before Oct 2026)
