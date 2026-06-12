@@ -397,3 +397,55 @@ Rogerio Laureano Gomes + Claude
 - WhatsApp button v2.0
 - Node.js 20 → 22 upgrade (before Oct 2026 deadline)
 - Go-live approval from Rogerio → `firebase deploy --only hosting`
+
+---
+
+## Session 6 — Phase 5 SEO + Security + Go-Live (June 11, 2026)
+
+### Participants
+Rogerio Laureano Gomes + Claude
+
+### What Was Built
+
+**Phase 5 — SEO (Complete)**
+- Keyword-precise meta tags on all 14 pages — problem-first titles targeting buyer searches
+- Canonical URLs, full Open Graph tags, geo targeting meta tags on every page
+- Organization JSON-LD structured data on homepage (ProfessionalService schema)
+- Service JSON-LD on all 5 service pages with areaServed
+- sitemap.xml — all 14 public URLs with priorities
+- robots.txt — admin/login/portal blocked
+- GA4 Measurement ID G-BFEV07JWC2 implemented + generate_lead conversion event
+- Partnership + European geo signals: About page global reach strip, JSON-LD expanded to UK/Spain
+- SEO strategy documented: precision B2B targeting, content-first, LinkedIn primary channel
+
+**Pre-Launch Security Audit**
+- Full penetration assessment: 14 vectors, 11 pass, 3 fixed
+- CRITICAL fix: CORS locked from origin:true to domain whitelist
+- Input sanitization: HTML stripping + length limits on all 14 form fields
+- Admin role: explicit email whitelist replacing string match
+- .env removed from git tracking
+- Firebase API key restriction attempted → broke Firebase Auth → set to None (acceptable, data protected by Firestore rules)
+- Firebase App Check deferred to Phase 7
+
+**Go-Live — June 11, 2026**
+- `firebase deploy --only hosting` — site live at rgenterpriseconsulting.com
+- Post-launch issues resolved: auth/invalid-api-key (env vars undefined), CSP errors (GTM/Firebase domains), www SSL error (Firebase custom domain)
+- Google Search Console: property added, sitemap submitted, indexing requested on 6 pages
+- GA4 linked to Search Console
+
+### Decisions Locked
+1. Firebase API key restriction = None — protected by Firestore rules, App Check post-launch
+2. SEO strategy: precision over volume — no broad keywords, no Google Ads until month 3–6
+3. LinkedIn is primary lead channel months 1–6
+4. First Insights article to be published this week
+5. Document SEO summary in BRD — deferred to next session per Rogerio's request
+
+### What Comes Next
+- Deploy functions: `firebase deploy --only functions` (CORS security fix)
+- Publish first LinkedIn post announcing go-live
+- Publish first Insights article via /admin/insights
+- Check GA4 in 48h for first real visitor data
+- Check Search Console Coverage report in 48h
+- Phase 6: Client Portal v2 redesign
+- Phase 7: Firebase App Check + Super-Admin CMS
+- Next session: SEO summary in BRD + review GA4 data

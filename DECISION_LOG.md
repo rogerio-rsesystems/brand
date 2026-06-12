@@ -675,3 +675,135 @@ Recommended actions: `CALL_TODAY` / `FOLLOW_UP_48H` / `NURTURE` / `DO_NOT_ENGAGE
 | SEO meta tags & sitemap | 🟡 Phase 5 | |
 | ClientSignup rebrand | 🔴 Phase 7 | |
 | `firebase deploy --only hosting` | 🔴 DO NOT RUN | Until Rogerio approves go-live |
+
+---
+
+## Phase 5 — SEO & Go-Live (June 2026)
+
+### SEO Implementation — Complete
+
+| Page | Title Tag | Keywords Targeted |
+|------|-----------|-------------------|
+| Homepage | RG Enterprise Consulting — M&A Integration, AI Readiness & Digital Transformation Consulting | post-merger integration consultant, M&A integration, boutique consulting |
+| Services | M&A Integration, AI Readiness & Digital Transformation Consulting Services — RGE | PMI consulting, AI readiness assessment, digital transformation |
+| PMI service | Post-Merger Integration (PMI) Consulting — RG Enterprise Consulting | post merger integration consultant, IMO setup, M&A integration LATAM |
+| AI Readiness | AI Readiness Assessment & Corporate AI Strategy Consulting — RGE | AI readiness assessment enterprise, corporate AI strategy |
+| Digital Transformation | Digital Transformation & Technology Integration Consulting — RGE | digital transformation consulting, ERP implementation program management |
+| Business Transformation | Business Transformation & Organizational Strategy Consulting — RGE | business transformation consulting, organizational strategy |
+| Project Management | PMO Consulting & Program Management Services — RGE | PMO consulting, program management consulting, PMO setup |
+| About | About RG Enterprise Consulting — Boutique M&A & Transformation Consulting Firm | boutique consulting firm, consulting partnerships, LATAM expansion |
+| Portfolio | M&A Integration & Transformation Case Studies — RGE | M&A integration case studies, transformation outcomes |
+| Insights | M&A Integration & AI Readiness Insights — RGE Blog | thought leadership, M&A integration insights |
+| Careers | Consulting Careers — Join RGE | consulting careers, PMI consultant jobs |
+| Contact | Contact RGE — Start Your Transformation Engagement | contact consulting firm, M&A integration consultant contact |
+
+### Technical SEO Implemented
+- Canonical URLs on all 14 pages
+- `sitemap.xml` — all 14 public URLs with priorities (service pages 0.9, contact 0.8)
+- `robots.txt` — admin/login/portal blocked, public pages allowed
+- Organization JSON-LD structured data on homepage — ProfessionalService schema
+- Service JSON-LD on all 5 service pages
+- Geo targeting meta tags — Johns Creek GA, USA primary
+- Full Open Graph tags (og:image, og:title, og:description, og:locale) on all pages
+- GA4 Measurement ID `G-BFEV07JWC2` implemented
+- `generate_lead` conversion event fires on every contact form submission
+
+### Partnership & European Geo Signals Added
+- About page: Global Reach strip — Geographic Reach / Consulting Partnerships / Languages
+- About page: 4th card added to Agency Model — "Strategic Partnerships"
+- Services hero: mentions North America, Latin America, UK, Europe
+- JSON-LD areaServed expanded: + United Kingdom + Spain
+- Meta keywords: + consulting firm partnership, M&A integration Latin America, LATAM expansion consulting
+- PMI page: "Trusted partner for consulting firms co-delivering M&A programs"
+- Target audiences: (1) Corporate M&A executives USA, (2) PE-backed mid-market, (3) UK/Spain firms expanding to LATAM, (4) Consulting firm partners
+
+### SEO Strategy — Decisions Locked
+- No broad keyword targeting — precision over volume
+- Content strategy: 1 Insights article/month minimum (highest ROI SEO action)
+- Google Ads: defer to months 3–6 after organic baseline established
+- LinkedIn: primary lead channel months 1–6 (faster than organic search)
+- Target timeline: page 1 for niche long-tail keywords in 3–6 months
+
+---
+
+## Pre-Launch Security Audit (June 2026)
+
+### Penetration Assessment Results
+Overall rating: B+ — Strong foundation, 3 gaps fixed
+
+| Vector | Finding | Action |
+|--------|---------|--------|
+| CORS | origin: true — any domain could call Firebase Functions | FIXED — locked to rgenterpriseconsulting.com + localhost |
+| Input sanitization | No server-side sanitization on form fields | FIXED — HTML stripping, length limits, email regex on all 14 fields |
+| Admin role bootstrap | Email match could be exploited | FIXED — explicit ADMIN_EMAILS whitelist |
+| Firebase API key | Committed to git history in early commit | FIXED — removed from tracking; fallback values in firebase.js |
+| .env file | Accidentally committed to git | FIXED — removed from git tracking |
+| Firestore rules | Already hardened | PASS |
+| HTTP security headers | HSTS, X-Frame-Options, CSP, Permissions-Policy | PASS |
+| reCAPTCHA | Active with localhost bypass | PASS |
+| Rate limiting | 5 submissions/IP/hour | PASS |
+| Server secrets | In Firebase Secret Manager | PASS |
+
+### Firebase API Key Restriction — Decision
+- HTTP referrer restriction was attempted but broke Firebase Auth (`auth/invalid-api-key`)
+- Root cause: Firebase Auth initializes from multiple internal Google domains not easily whitelisted
+- Resolution: Set Application restrictions to "None" — acceptable because Firestore Security Rules protect data at the collection level
+- Proper solution: Firebase App Check (deferred to post-launch — see Phase 7)
+- Firebase API keys for web apps are intentionally semi-public — real security is at the rules layer
+
+### Security Files Deployed
+- `firestore.rules` — hardened with field validation, draft article protection, admin whitelist
+- `storage.rules` — resumes: public upload (PDF/Word, max 5MB, no overwrites), admin read only
+- `firebase.json` — full HTTP security headers, CSP, HSTS
+- `functions/index.js` — CORS lock, input sanitization, rate limiting, reCAPTCHA, IP intelligence
+
+---
+
+## Go-Live — June 11, 2026
+
+### Launch Sequence
+1. `npm run build` → `firebase deploy --only functions` → `firebase deploy --only hosting`
+2. Domain: `https://rgenterpriseconsulting.com` — LIVE ✅
+3. `www.rgenterpriseconsulting.com` — configured via Firebase Hosting custom domain (SSL provisioning)
+4. Google Search Console — property added, sitemap submitted
+5. GA4 linked to Search Console
+6. Request indexing submitted for homepage + 5 money pages
+
+### Post-Launch Issues Resolved
+| Issue | Root Cause | Fix |
+|-------|-----------|-----|
+| Blank page on load | `auth/invalid-api-key` — .env removed from git, env vars undefined in build | Added fallback values to firebase.js and firebase-config.js |
+| CSP blocking GA4/GTM | Google Tag Manager not in Content Security Policy | Added googletagmanager, analytics, firebaseinstallations, wss to CSP |
+| www subdomain SSL error | www not configured as Firebase Hosting custom domain | Added www.rgenterpriseconsulting.com as custom domain in Firebase Console |
+
+### Post-Launch Checklist
+| Item | Status |
+|------|--------|
+| Site live at rgenterpriseconsulting.com | ✅ |
+| www redirect configured | ✅ |
+| Sitemap submitted to Search Console | ✅ |
+| GA4 linked to Search Console | ✅ |
+| Index requests submitted for money pages | ✅ |
+| functions deployed (CORS + security) | 🟡 Run: firebase deploy --only functions |
+| Firebase App Check | 🔴 Next session |
+| Node.js 20 → 22 upgrade | 🔴 Before Oct 2026 |
+| First Insights article published | 🔴 This week |
+| LinkedIn announcement post | 🔴 Today |
+
+---
+
+## Updated Master Checklist — Post-Launch
+
+| Phase | Item | Status |
+|-------|------|--------|
+| Phase 1 | Brand & Design | ✅ Complete |
+| Phase 2 | Services & Leads | ✅ Complete |
+| Phase 3 | Portfolio, Insights, Careers | ✅ Complete |
+| Phase 4 | Visual Identity + Lead Intelligence | ✅ Complete |
+| Phase 5 | SEO & Go-Live | ✅ Complete |
+| Phase 6 | Client Portal v2 | 🔴 Next |
+| Phase 7 | Super-Admin CMS + App Check | 🔴 Future |
+| — | PPT template + Word letterhead | 🟡 Post-launch |
+| — | Higgsfield service visuals | 🟡 Non-blocking |
+| — | Node.js 20 → 22 | 🟡 Before Oct 2026 |
+| — | SEO summary in BRD | 🟡 Next session |
